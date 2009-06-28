@@ -1,47 +1,27 @@
-@import compass/reset.sass
-@import compass/utilities.sass
-@import blueprint/screen.sass
-
-!blueprint_grid_columns = 24
-!blueprint_grid_width = 30px
-!blueprint_grid_margin = 10px
-
-+blueprint
-
-@import blueprint/modules/debug.sass
-
-// Base
-=flatten_list
-  :margin 0
-  :list-style none
-
-
-// Typography
-h1, h2
-  :font-weight bold
-
-h1, h2
-  :margin 1em 0 0.5em 0
-
+@import base.sass
 
 // Main
-body
-  :color #000
-  :font-family Helvetica, Arial, sans-serif
+#content
+  +container
+  // +showgrid
+  :background url(/images/boxes.png) 0.5em 0.5em no-repeat
+  :min-height 568px
 
-  #content
-    +container
-    +showgrid
-    :background url(/images/boxes.png) 0.5em 0.5em no-repeat
-    :min-height 568px
+  #main
+    +column(14)
+    :margin-left 40px
 
-    #main
-      +column(14)
-      :margin-left 40px
-
-      #entries
-        +flatten_list
-
-    #sidebar
+    #entries
       +flatten_list
-      +column(9, true)
+
+  #sidebar
+    +flatten_list
+    +column(7, true)
+    :color #666
+
+    h2
+      :color #666
+      :font-weight normal
+
+    #recent
+      +flatten_list

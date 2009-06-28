@@ -1,0 +1,43 @@
+!blueprint_grid_columns = 22
+!blueprint_grid_width = 30px
+!blueprint_grid_margin = 10px
+
+@import compass/reset.sass
+@import compass/utilities.sass
+@import blueprint/screen.sass
+@import blueprint/modules/debug.sass
+
++blueprint
+
+// Mixins
+=flatten_list
+  :margin 0
+  :list-style none
+
+
+// Typography
+h1, h2
+  :font-weight bold
+  :margin 1em 0 0.5em 0
+
+
+a
+  :color #006D80
+
+  &:visited
+    :color #006D80
+
+  &:active, &:hover
+    :background-color #84CECC
+    :color #3C2000
+
+  h1 &
+    :color #78A419 !important
+    :text-decoration none
+
+    &:hover
+      :background-color #78A419
+      :color #FFFFFF !important
+
+body
+  :color #000
