@@ -414,5 +414,6 @@ body { color: #000; }
 #content #main #entries { margin: 0; list-style: none; }
 #content #sidebar { margin: 0; list-style: none; display: inline; float: left; margin-right: 0; width: 270px; color: #666; }
 * html #content #sidebar { overflow-x: hidden; }
-#content #sidebar h2 { color: #666; font-weight: normal; }
-#content #sidebar #recent { margin: 0; list-style: none; }
+#content #sidebar h2 { color: #666; font-weight: normal; margin-bottom: 0; }
+#content #sidebar ol { margin: 0; list-style: none; }
+#content #sidebar ol, #content #sidebar p { margin-left: 1em; }
