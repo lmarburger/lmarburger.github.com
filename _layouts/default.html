@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <title>{{ page.title }}</title>
+    <meta name="author" content="Larry Marburger" />
+    <link rel="stylesheet" href="/stylesheets/main.css" type="text/css" media="screen, projection" />
+  </head>
+  <body>
+    <div id="content">
+      <div id="main">
+  		  <h1><a href="/" title="Developmentastic">Developmentastic</a></h1>
+
+  		  {{ content }}
+  		</div>
+  		
+  		<ul id="sidebar">
+  			<li>
+  				<h2>Recent Posts</h2>
+  				<ol id="recent">
+            {% for post in site.posts limit:5 %}
+              <li>{{ post.title }}</li>
+            {% endfor %}
+  				</ol>
+  			</li>
+
+  			<li>
+  				<h2>Who is this guy?</h2>
+  				<p id="about">
+  					<!-- I know it's bad karma to put a space around an em dash, but Firefox won't line
+  						wrap without it. I'm not an English major. What do I care? -->
+  					The name's Larry Marburger. I'm just some guy on the internet who likes technology &mdash; JavaScript, Rails, Flex and .NET
+  					to name a few.  I use these technologies to build kickass thingamajigs at
+  					<a href="http://andculture.com" title="andCulture">andCulture</a>.
+  				</p>
+  			</li>
+
+  			<li>
+  				<h2>Latest <a href="http://twitter.com/lmarburger" title="My Tweets">Tweets</a></h2>
+  				<ol id="tweets">
+  				</ol>
+  			</li>
+  		</ul>
+  		
+  	</div>
+	</body>
+</html>
