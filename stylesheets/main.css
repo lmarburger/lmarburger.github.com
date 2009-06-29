@@ -412,9 +412,9 @@ body { color: #000; }
 #content #main { display: inline; float: left; margin-right: 10px; width: 590px; margin-left: 40px; }
 * html #content #main { overflow-x: hidden; }
 #content #main #entries { margin: 0; list-style: none; }
-#content #sidebar { margin: 0; list-style: none; display: inline; float: left; margin-right: 0; width: 230px; color: #666; }
+#content #sidebar { margin: 0; list-style: none; display: inline; float: left; margin-right: 0; width: 230px; color: #666; padding-top: 1em; }
 * html #content #sidebar { overflow-x: hidden; }
-#content #sidebar h2 { color: #666; font-weight: normal; margin-bottom: 0; }
+#content #sidebar h2 { color: #666; font-weight: normal; margin: 0.5em 0 0; }
 #content #sidebar ol { margin: 0; list-style: none; }
 #content #sidebar ol, #content #sidebar p { margin-left: 1em; }
 #content #sidebar li.archive { margin-top: 0.5em; text-align: right; }
