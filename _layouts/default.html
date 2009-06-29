@@ -30,7 +30,7 @@
   				<h2>Recent Posts</h2>
   				<ol id="recent">
             {% for post in site.posts limit:5 %}
-              <li>{{ post.title }}</li>
+              <li><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
             {% endfor %}
   				</ol>
   			</li>
