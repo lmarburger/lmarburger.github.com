@@ -13,7 +13,7 @@
 
   		  {{ content }}
   		</div>
-  		
+
   		<ul id="sidebar">
   			<li>
   				<h2>Who is this guy?</h2>
@@ -32,6 +32,10 @@
             {% for post in site.posts limit:5 %}
               <li><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
             {% endfor %}
+
+            {% if site.posts.size > 5 %}
+              <li class="archive"><a href="/archive.html" title="Read some older posts&#133;">Read some older posts&#133;</a></li>
+            {% endif %}
   				</ol>
   			</li>
 
@@ -41,7 +45,7 @@
   				</ol>
   			</li>
   		</ul>
-  		
+
   	</div>
 	</body>
 </html>

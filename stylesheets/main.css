@@ -409,11 +409,12 @@ body { color: #000; }
 
 #content { width: 870px; margin: 0 auto; overflow: hidden; display: inline-block; background: url(/images/boxes.png) 0.5em 0.5em no-repeat; min-height: 568px; }
 #content { display: block; }
-#content #main { display: inline; float: left; margin-right: 10px; width: 550px; margin-left: 40px; }
+#content #main { display: inline; float: left; margin-right: 10px; width: 590px; margin-left: 40px; }
 * html #content #main { overflow-x: hidden; }
 #content #main #entries { margin: 0; list-style: none; }
-#content #sidebar { margin: 0; list-style: none; display: inline; float: left; margin-right: 0; width: 270px; color: #666; }
+#content #sidebar { margin: 0; list-style: none; display: inline; float: left; margin-right: 0; width: 230px; color: #666; }
 * html #content #sidebar { overflow-x: hidden; }
 #content #sidebar h2 { color: #666; font-weight: normal; margin-bottom: 0; }
 #content #sidebar ol { margin: 0; list-style: none; }
 #content #sidebar ol, #content #sidebar p { margin-left: 1em; }
+#content #sidebar li.archive { margin-top: 0.5em; text-align: right; }

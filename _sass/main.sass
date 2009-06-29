@@ -8,7 +8,7 @@
   :min-height 568px
 
   #main
-    +column(14)
+    +column(15)
     :margin-left 40px
 
     #entries
@@ -16,7 +16,7 @@
 
   #sidebar
     +flatten_list
-    +column(7, true)
+    +column(6, true)
     :color #666
 
     h2
@@ -29,3 +29,7 @@
 
     ol, p
       :margin-left 1em
+
+    li.archive
+      :margin-top 0.5em
+      :text-align right
