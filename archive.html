@@ -3,7 +3,7 @@ layout: default
 title: Developmentastic - Post Archive
 ---
 <ol id="entries">
-  {% for post in site.posts limit:5 %}
+  {% for post in site.posts %}
     <li><a href="{{ post.url }}" title="{{ post.title | xml_escape }}">{{ post.title }}</a></li>
   {% endfor %}
 </ol>
