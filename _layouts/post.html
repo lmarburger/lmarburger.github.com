@@ -2,8 +2,12 @@
 layout: default
 ---
 <ol id="entries">
-  <li>
-    <h2>{{ page.title }}</h2>
+  <li class="{{ page.category }}">
+    <h2>{{ page.title | xml_escape }}</h2>
     {{ content }}
+
+    {% if page.category == 'tweet' %}
+      <a class="permalink" href="http://twitter.com/lmarburger/status/{{ page.title }}" title="View tweet">View tweet</a>
+    {% endif %}
   </li>
 </ol>
