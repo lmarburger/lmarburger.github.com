@@ -25,25 +25,6 @@
             <a href="http://andculture.com" title="andCulture">andCulture</a>.
           </p>
         </li>
-
-        <li>
-          <h2>Recent Posts</h2>
-          <ol id="recent">
-            {% for post in site.posts limit:5 %}
-              <li><a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></li>
-            {% endfor %}
-
-            {% if site.posts.size > 5 %}
-              <li class="archive"><a href="/archive.html" title="Read some older posts&#133;">Read some older posts&#133;</a></li>
-            {% endif %}
-          </ol>
-        </li>
-
-        <li>
-          <h2>Latest <a href="http://twitter.com/lmarburger" title="My Tweets">Tweets</a></h2>
-          <ol id="tweets">
-          </ol>
-        </li>
       </ul>
 
     </div>
