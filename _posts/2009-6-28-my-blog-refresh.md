@@ -1,6 +1,7 @@
 ---
 layout: post
 title: my_blog.refresh
+category: blog
 ---
 Not a visual refresh--although the design was rebuilt using [Sass][sass] and the [Blueprint CSS framework][blueprint] with the help of the **amazing** [Compass][compass] project ([Chris Eppstein][chriseppstein], you rock. Seriously.)--but more of a purpose refresh. It's apparent I'm not able to write long-winded blog posts with any level of consistency, but I have no trouble [tweeting 0.62 times daily][followcost]. I'll attempt to strike a balance somewhere between and hope for the best.
 
