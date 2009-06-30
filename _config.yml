@@ -1,3 +1,2 @@
 permalink: /:year/:month/:title.html
-exclude:
-  - config.rb
+exclude: config.rb
