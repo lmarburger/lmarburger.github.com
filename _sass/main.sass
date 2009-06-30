@@ -1,10 +1,13 @@
 @import partials/base.sass
 
+!twitter_color = #84CECC
+!blog_color = #006D80
+!post_type_border_width = 5px
+
 // Main
 #content
   +container
   // +showgrid
-  :background url(/images/boxes.png) 0.5em 0.5em no-repeat
   :min-height 568px
 
   #main
@@ -13,6 +16,31 @@
 
     #entries
       +flatten_list
+
+      li
+        :padding-left 10px
+
+        &.tweet
+          :border-left = !post_type_border_width "solid" !twitter_color
+          :margin-bottom 1.5em
+
+          h2
+            :display none
+
+          p
+            :margin 0
+            :display inline
+
+          a.permalink
+            +hide_text
+            :display inline-block
+            :background url(/images/twitter_icon.png) center center no-repeat
+            :height 16px
+            :width 16px
+            :margin-left 5px
+
+        &.blog
+          :border-left = !post_type_border_width "solid" !blog_color
 
   #sidebar
     +flatten_list
