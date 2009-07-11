@@ -2,7 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>{{ page.title }}</title>
+    <title>
+      {% if page.category == "tweet" %}
+        Tweet
+      {% else %}
+        {{ page.title }}
+      {% endif %}
+    </title>
     <meta name="author" content="Larry Marburger" />
 
     <link rel="stylesheet" href="/stylesheets/main.css" type="text/css" media="screen, projection" />
