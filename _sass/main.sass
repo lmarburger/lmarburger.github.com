@@ -4,14 +4,14 @@
 !blog_color = #006D80
 !post_type_border_width = 5px
 
+
 // Main
 #content
   +container
   // +showgrid
 
   #main
-    +column(15)
-    :margin-left 40px
+    +column(7)
 
     #entries
       +flatten_list
@@ -43,14 +43,11 @@
 
   #sidebar
     +flatten_list
-    +column(6, true)
+    +column(3, true)
     :color #666
-    :padding-top 1em
 
     h2
       :color #666
       :font-weight normal
-      :margin 0.5em 0 0
+      :margin 36px 0 0.25em
 
-    p
-      :margin-left 1em
