@@ -357,7 +357,7 @@ input.span-22, textarea.span-22, select.span-22 { width: 870px !important; }
 
 .push-22 { margin: 0 -880px 1.5em 880px; }
 
-.showgrid { background: url(/images/grid.png?1246154897); }
+.showgrid { background: url('/images/grid.png?1247271467'); }
 
 .error { padding: .8em; margin-bottom: 1em; border: 2px solid #dddddd; background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
 .error a { color: #8a1f11; }
