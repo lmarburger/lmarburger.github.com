@@ -5,9 +5,9 @@ layout: nil
 <feed xmlns="http://www.w3.org/2005/Atom">
  <title>Developmentastic</title>
  <link href="http://lmarburger.github.com/atom.xml" rel="self" />
- <link href="http://lmarburger.github.com" />
+ <link href="http://lmarburger.github.com/" />
  <updated>{{ site.time | date_to_xmlschema }}</updated>
- <id>http://lmarburger.github.com</id>
+ <id>http://lmarburger.github.com/</id>
  <author>
   <name>Larry Marburger</name>
   <email>larry@marburger.cc</email>
