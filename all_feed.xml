@@ -15,7 +15,13 @@ layout: nil
  
  {% for post in site.posts %}
  <entry>
-  <title>{{ post.title }}</title>
+  <title>
+    {% if post.category == "tweet" %}
+      Tweet
+    {% else %}
+      {{ post.title }}
+    {% endif %}
+  </title>
   <link href="http://lmarburger.github.com{{ post.url }}" />
   <updated>{{ post.date | date_to_xmlschema }}</updated>
   <id>http://lmarburger.github.com{{ post.id }}</id>
