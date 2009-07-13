@@ -289,7 +289,7 @@ pre { background-color: #f8f8ff; border: 1px solid #dedede; padding: 0.5em; marg
 #content #main #entries li.tweet { border-left: 5px solid #84cecc; margin-bottom: 1.5em; }
 #content #main #entries li.tweet h2 { display: none; }
 #content #main #entries li.tweet p { margin: 0; display: inline; }
-#content #main #entries li.tweet a.permalink { text-indent: -9999px; display: inline-block; background: url(/images/twitter_icon.png) center center no-repeat; height: 16px; width: 16px; margin-left: 5px; }
+#content #main #entries li.tweet a.permalink { text-indent: -9999px; display: inline-block; background: url('/images/twitter_icon.png?1246328538') center center no-repeat; height: 16px; width: 16px; margin-left: 5px; }
 #content #main #entries li.blog { border-left: 5px solid #006d80; }
 #content #sidebar { display: inline; float: left; margin-right: 0; width: 220px; color: #666; }
 * html #content #sidebar { overflow-x: hidden; }
