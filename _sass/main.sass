@@ -1,4 +1,6 @@
 @import partials/base.sass
+@import compass/utilities/text/replacement.sass
+@import compass/utilities/general/inline_block.sass
 
 !twitter_color = #84CECC
 !blog_color = #006D80
@@ -32,9 +34,8 @@
             :display inline
 
           a.permalink
-            +hide_text
-            :display inline-block
-            :background #{ image_url("twitter_icon.png") } center center no-repeat
+            +replace-text("twitter_icon.png")
+            +inline-block
             :height 16px
             :width 16px
             :margin-left 5px
