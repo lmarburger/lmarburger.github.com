@@ -286,7 +286,7 @@ pre { background-color: #f8f8ff; border: 1px solid #dedede; padding: 0.5em; marg
 * html #content #main { overflow-x: hidden; }
 #content #main #entries { margin: 0; list-style: none; }
 #content #main #entries li { padding-left: 10px; }
-#content #main #entries li a.permalink { display: inline; float: left; margin-right: 20px; width: 60px; display: inline; float: left; position: relative; margin-left: -60px; height: 21px; width: 21px; margin-top: 10px; }
+#content #main #entries li a.permalink { display: inline; float: left; margin-right: 20px; width: 60px; display: inline; float: left; position: relative; margin-left: -48px; height: 21px; width: 21px; margin-top: 10px; }
 * html #content #main #entries li a.permalink { overflow-x: hidden; }
 #content #main #entries li a.permalink:active, #content #main #entries li a.permalink:hover { background-color: inherit; }
 #content #main #entries li.tweet { border-left: 5px solid #84cecc; margin-bottom: 1.5em; }
