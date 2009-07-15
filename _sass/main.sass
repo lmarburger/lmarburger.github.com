@@ -33,7 +33,7 @@
             :background-color inherit
 
         &.tweet
-          :border-left = !post_type_border_width "solid" !twitter_color
+          :border-left #{ !post_type_border_width } solid #{ !twitter_color }
           :margin-bottom 1.5em
 
           a.permalink
@@ -43,7 +43,7 @@
             :margin 0
 
         &.blog
-          :border-left = !post_type_border_width "solid" !blog_color
+          :border-left #{ !post_type_border_width } solid #{ !blog_color }
 
           a.permalink
             +replace-text("note.png")
