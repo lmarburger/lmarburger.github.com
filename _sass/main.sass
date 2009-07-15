@@ -22,26 +22,31 @@
       li
         :padding-left 10px
 
+        a.permalink
+          +column(1)
+          +pull(0.75)
+          :height 21px
+          :width 21px
+          :margin-top 10px
+
+          &:active, &:hover
+            :background-color inherit
+
         &.tweet
           :border-left = !post_type_border_width "solid" !twitter_color
           :margin-bottom 1.5em
 
-          h2
-            :display none
+          a.permalink
+            +replace-text("tweet.png")
 
           p
             :margin 0
-            :display inline
-
-          a.permalink
-            +replace-text("twitter_icon.png")
-            +inline-block
-            :height 16px
-            :width 16px
-            :margin-left 5px
 
         &.blog
           :border-left = !post_type_border_width "solid" !blog_color
+
+          a.permalink
+            +replace-text("note.png")
 
   #sidebar
     +column(3, true)

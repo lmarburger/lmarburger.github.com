@@ -286,11 +286,14 @@ pre { background-color: #f8f8ff; border: 1px solid #dedede; padding: 0.5em; marg
 * html #content #main { overflow-x: hidden; }
 #content #main #entries { margin: 0; list-style: none; }
 #content #main #entries li { padding-left: 10px; }
+#content #main #entries li a.permalink { display: inline; float: left; margin-right: 20px; width: 60px; display: inline; float: left; position: relative; margin-left: -60px; height: 21px; width: 21px; margin-top: 10px; }
+* html #content #main #entries li a.permalink { overflow-x: hidden; }
+#content #main #entries li a.permalink:active, #content #main #entries li a.permalink:hover { background-color: inherit; }
 #content #main #entries li.tweet { border-left: 5px solid #84cecc; margin-bottom: 1.5em; }
-#content #main #entries li.tweet h2 { display: none; }
-#content #main #entries li.tweet p { margin: 0; display: inline; }
-#content #main #entries li.tweet a.permalink { text-indent: -9999em; overflow: hidden; background-image: url('/images/twitter_icon.png?1246328538'); background-repeat: no-repeat; background-position: 50% 50%; zoom: 1; display: inline; display: -moz-inline-box; display: inline-block; vertical-align: top; height: 16px; width: 16px; margin-left: 5px; }
+#content #main #entries li.tweet a.permalink { text-indent: -9999em; overflow: hidden; background-image: url('/images/tweet.png?1247678559'); background-repeat: no-repeat; background-position: 50% 50%; }
+#content #main #entries li.tweet p { margin: 0; }
 #content #main #entries li.blog { border-left: 5px solid #006d80; }
+#content #main #entries li.blog a.permalink { text-indent: -9999em; overflow: hidden; background-image: url('/images/note.png?1247678549'); background-repeat: no-repeat; background-position: 50% 50%; }
 #content #sidebar { display: inline; float: left; margin-right: 0; width: 220px; color: #666; }
 * html #content #sidebar { overflow-x: hidden; }
 #content #sidebar h2 { color: #666; font-weight: normal; margin: 36px 0 0.25em; }
