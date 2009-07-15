@@ -21,6 +21,7 @@
 
       li
         :padding-left 10px
+        :margin-bottom 1.5em
 
         a.permalink
           +column(1)
@@ -34,7 +35,6 @@
 
         &.tweet
           :border-left #{ !post_type_border_width } solid #{ !twitter_color }
-          :margin-bottom 1.5em
 
           a.permalink
             +replace-text("tweet.png")
@@ -44,6 +44,9 @@
 
         &.blog
           :border-left #{ !post_type_border_width } solid #{ !blog_color }
+
+          h2
+            :margin-top 0
 
           a.permalink
             +replace-text("note.png")
