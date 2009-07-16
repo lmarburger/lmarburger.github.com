@@ -1,3 +1,4 @@
+// Configure bluepring and the grids
 !blueprint_grid_columns = 10
 !blueprint_grid_width = 60px
 !blueprint_grid_margin  = 20px
@@ -8,14 +9,12 @@
 
 +blueprint
 
+@import utilities.sass
 
-// Mixins
-=flatten_list
-  :margin 0
-  :list-style none
+!my_green = #78A419
+!my_dark_blue = #006D80
+!my_light_blue = #84CECC
 
-=hide_text
-  :text-indent -9999px
 
 h1, h2
   :font-weight bold
@@ -26,26 +25,27 @@ h1, h2
     :margin -5px
 
 a
-  :color #006D80
+  :color = !my_dark_blue
 
   &:visited
-    :color #006D80
+    :color = !my_dark_blue
 
   &:active, &:hover
-    :background-color #84CECC
+    :background-color = !my_light_blue
     :color #3C2000
 
   h1 &
-    :color #78A419 !important
+    :color #{ !my_green } !important
     :text-decoration none
 
     &:hover
-      :background-color #78A419
+      :background-color = !my_green
       :color #FFFFFF !important
 
 body
   :color #000
 
+// Code blocks
 pre
   :background-color #f8f8ff
   :border 1px solid #dedede

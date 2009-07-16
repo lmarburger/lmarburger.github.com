@@ -2,16 +2,15 @@
 @import compass/utilities/text/replacement.sass
 @import compass/utilities/general/inline_block.sass
 
-!twitter_color = #84CECC
-!blog_color = #006D80
 !post_type_border_width = 5px
 
 
-// Main
 #content
   +container
-  :overflow visible
   // +showgrid
+
+  // Pushing a few items outside the container.
+  :overflow visible
 
   #main
     +column(7)
@@ -34,7 +33,8 @@
             :background-color inherit
 
         &.tweet
-          :border-left #{ !post_type_border_width } solid #{ !twitter_color }
+          // Compare this style to the border declaration below.
+          :border-left #{ !post_type_border_width } solid #{ !my_light_blue }
 
           a.permalink
             +replace-text("tweet.png")
@@ -43,7 +43,7 @@
             :margin 0
 
         &.blog
-          :border-left #{ !post_type_border_width } solid #{ !blog_color }
+          :border-left = !post_type_border_width "solid" !my_dark_blue
 
           h2
             :margin-top 0
@@ -61,6 +61,6 @@
       :margin 36px 0 0.25em
 
 #footer
-  :background-color #78A419
+  :background-color = !my_green
 
 +sticky-footer(5px, "#content", "#content_footer", "#footer")
