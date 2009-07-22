@@ -2,7 +2,8 @@
 @import compass/utilities/text/replacement.sass
 @import compass/utilities/general/inline_block.sass
 
-!post_type_border_width = 5px
+@import partials/entries.sass
+@import partials/footer.sass
 
 
 #content
@@ -15,42 +16,6 @@
   #main
     +column(7)
 
-    #entries
-      +flatten_list
-
-      li
-        :padding-left 10px
-        :margin-bottom 1.5em
-
-        a.permalink
-          +column(1)
-          +pull(0.6)
-          :height 21px
-          :width 21px
-          :margin-top 10px
-
-          &:active, &:hover
-            :background-color inherit
-
-        &.tweet
-          // Compare this style to the border declaration below.
-          :border-left #{ !post_type_border_width } solid #{ !my_light_blue }
-
-          a.permalink
-            +replace-text("tweet.png")
-
-          p
-            :margin 0
-
-        &.blog
-          :border-left = !post_type_border_width "solid" !my_dark_blue
-
-          h2
-            :margin-top 0
-
-          a.permalink
-            +replace-text("note.png")
-
   #sidebar
     +column(3, true)
     :color #666
@@ -59,8 +24,3 @@
       :color #666
       :font-weight normal
       :margin 36px 0 0.25em
-
-#footer
-  :background-color = !my_green
-
-+sticky-footer(5px, "#content", "#content_footer", "#footer")

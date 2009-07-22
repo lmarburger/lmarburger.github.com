@@ -1,0 +1,36 @@
+#entries
+  +flatten_list
+
+  li
+    :padding-left 10px
+    :margin-bottom 1.5em
+
+    a.permalink
+      +column(1)
+      +pull(0.7)
+      :height 21px
+      :width 21px
+      :margin-top 7px
+      :background-color inherit
+
+      &:active, &:hover
+        :background-color = !my_light_blue
+
+    &.tweet
+      // Compare this style to the border declaration below.
+      :border-left #{ !post_type_border_width } solid #{ !my_light_blue }
+
+      a.permalink
+        +replace-text("tweet.png")
+
+      p
+        :margin 0
+
+    &.blog
+      :border-left = !post_type_border_width "solid" !my_dark_blue
+
+      h2
+        :margin-top 0
+
+      a.permalink
+        +replace-text("note.png")

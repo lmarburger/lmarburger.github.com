@@ -7,14 +7,43 @@
 @import blueprint/reset.sass
 @import blueprint
 
-+blueprint
++blueprint-typography
++blueprint-utilities
++blueprint-interaction
 
 @import utilities.sass
 
 !my_green = #78A419
 !my_dark_blue = #006D80
 !my_light_blue = #84CECC
+!post_type_border_width = 5px
 
+
+a
+  :color = !my_dark_blue
+  :background-color #f0f0f0
+  :padding 0.25em 0.5em
+  :text-decoration none
+  :border-radius 6px
+  :-moz-border-radius 6px
+  :-webkit-border-radius 6px
+
+  &:visited
+    :color = !my_dark_blue
+
+  &:active, &:hover
+    :background-color = !my_light_blue
+    :color white
+
+  h1 &
+    :color #{ !my_green } !important
+
+    &:hover
+      :background-color = !my_green
+      :color #FFFFFF !important
+
+  h1 &, h2 &
+    :background-color inherit
 
 h1, h2
   :font-weight bold
@@ -23,24 +52,6 @@ h1, h2
   a
     :padding 5px
     :margin -5px
-
-a
-  :color = !my_dark_blue
-
-  &:visited
-    :color = !my_dark_blue
-
-  &:active, &:hover
-    :background-color = !my_light_blue
-    :color #3C2000
-
-  h1 &
-    :color #{ !my_green } !important
-    :text-decoration none
-
-    &:hover
-      :background-color = !my_green
-      :color #FFFFFF !important
 
 body
   :color #000
