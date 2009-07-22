@@ -141,7 +141,6 @@ pre { background-color: #f8f8ff; border: 1px solid #dedede; padding: 0.5em; marg
 #entries li { padding-left: 10px; margin-bottom: 1.5em; }
 #entries li a.permalink { display: inline; float: left; margin-right: 20px; width: 60px; display: inline; float: left; position: relative; margin-left: -56px; height: 21px; width: 21px; margin-top: 7px; background-color: inherit; }
 * html #entries li a.permalink { overflow-x: hidden; }
-#entries li a.permalink:active, #entries li a.permalink:hover { background-color: #84cecc; }
 #entries li.tweet { border-left: 5px solid #84cecc; }
 #entries li.tweet a.permalink { text-indent: -9999em; overflow: hidden; background-image: url('/images/tweet.png?1247678559'); background-repeat: no-repeat; background-position: 50% 50%; }
 #entries li.tweet p { margin: 0; }
