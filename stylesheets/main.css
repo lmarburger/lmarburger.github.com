@@ -87,42 +87,6 @@ caption { background: #eee; }
 
 .loud { color: #111111; }
 
-.clear { clear: both; }
-
-.nowrap { white-space: nowrap; }
-
-.clearfix { overflow: hidden; display: inline-block; }
-.clearfix { display: block; }
-
-.small { font-size: .8em; margin-bottom: 1.875em; line-height: 1.875em; }
-
-.large { font-size: 1.2em; line-height: 2.5em; margin-bottom: 1.25em; }
-
-.first { margin-left: 0; padding-left: 0; }
-
-.last { margin-right: 0; padding-right: 0; }
-
-.top { margin-top: 0; padding-top: 0; }
-
-.bottom { margin-bottom: 0; padding-bottom: 0; }
-
-.error { padding: .8em; margin-bottom: 1em; border: 2px solid #dddddd; background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
-.error a { color: #8a1f11; }
-
-.notice { padding: .8em; margin-bottom: 1em; border: 2px solid #dddddd; background: #fff6bf; color: #514721; border-color: #ffd324; }
-.notice a { color: #514721; }
-
-.success { padding: .8em; margin-bottom: 1em; border: 2px solid #dddddd; background: #e6efc2; color: #264409; border-color: #c6d880; }
-.success a { color: #264409; }
-
-.hide { display: none; }
-
-.highlight { background: yellow; }
-
-.added { background: #006600; color: white; }
-
-.removed { background: #990000; color: white; }
-
 a { border-radius: 6px; -moz-border-radius: 6px; -webkit-border-radius: 6px; -o-border-radius: 6px; color: #006d80; background-color: #f0f0f0; padding: 0.25em 0.5em; text-decoration: none; }
 a:visited { color: #006d80; }
 a:active, a:hover { background-color: #84cecc; color: white; }
