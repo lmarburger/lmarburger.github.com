@@ -61,8 +61,20 @@ class TwitterCacher
 layout: post
 category: tweet
 ---
-#{ tweet.text }
+#{ auto_link(tweet.text) }
       EOS
+    end
+
+    def auto_link(text)
+      link_usernames(link_urls(text))
+    end
+
+    def link_urls(text)
+      text.gsub %r{(\S+\.\w{2,3}(?:/\S+)?)}, '[\0](\0)'
+    end
+
+    def link_usernames(text)
+      text.gsub %r{@(\w+)}, '[\0](http://twitter.com/\1)'
     end
 
 end
