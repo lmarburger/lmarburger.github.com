@@ -14,8 +14,8 @@ class TwitterCacher
         file.write(content)
       end
 
-      `/usr/local/git/bin/git add #{ file_name }`
-      `/usr/local/git/bin/git commit -m "Added a new tweet."`
+      execute_git_command "add #{ file_name }"
+      execute_git_command %{commit -m "Added a new tweet."}
     end
   end
 
@@ -65,6 +65,10 @@ category: tweet
       EOS
     end
 
+end
+
+def execute_git_command(command)
+  `/usr/local/git/bin/git #{ command }`
 end
 
 # Change to the site's dir.
