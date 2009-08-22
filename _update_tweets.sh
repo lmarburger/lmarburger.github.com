@@ -14,23 +14,19 @@ class TwitterCacher
         file.write(content)
       end
 
-      execute_git_command "add #{ file_name }"
-      execute_git_command %{commit -m "Added a new tweet."}
+      Git.execute "add #{ file_name }"
+      Git.execute %{commit -m "Added a new tweet."}
     end
   end
 
   private
 
     def new_tweets
-      client.statuses.user_timeline.lmarburger.json(:since_id => last_tweet_id)
+      client.statuses.user_timeline.lmarburger.json(:since_id => tweet_ids.last)
     end
 
     def client
       @client ||= Grackle::Client.new
-    end
-
-    def last_tweet_id
-      tweet_ids.last
     end
 
     def tweet_ids
@@ -61,26 +57,34 @@ class TwitterCacher
 layout: post
 category: tweet
 ---
-#{ auto_link(tweet.text) }
+#{ AutoLink.link_content(tweet.text) }
       EOS
     end
 
-    def auto_link(text)
-      link_usernames(link_urls(text))
-    end
+end
 
-    def link_urls(text)
+class AutoLink
+
+  def self.link_content(content)
+    link_usernames(link_urls(content))
+  end
+
+  private
+
+    def self.link_urls(text)
       text.gsub %r{(\S+\.\w{2,3}(?:/\S+)?)}, '[\0](\0)'
     end
 
-    def link_usernames(text)
+    def self.link_usernames(text)
       text.gsub %r{@(\w+)}, '[\0](http://twitter.com/\1)'
     end
 
 end
 
-def execute_git_command(command)
-  `/usr/local/git/bin/git #{ command }`
+class Git
+  def self.execute(command)
+    `/usr/local/git/bin/git #{ command }`
+  end
 end
 
 # Change to the site's dir.
