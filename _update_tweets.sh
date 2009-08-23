@@ -61,6 +61,24 @@ category: tweet
       EOS
     end
 
+  class AutoLink
+
+    def self.link_content(content)
+      link_usernames(link_urls(content))
+    end
+
+    private
+
+      def self.link_urls(text)
+        text.gsub %r{(\S+\.\w{2,3}(?:/\S+)?)}, '[\0](\0)'
+      end
+
+      def self.link_usernames(text)
+        text.gsub %r{@(\w+)}, '[\0](http://twitter.com/\1)'
+      end
+
+  end
+
   class Git
 
     def self.path=(path)
@@ -71,24 +89,6 @@ category: tweet
       `#{ @@path } #{ command }`
     end
   end
-
-end
-
-class AutoLink
-
-  def self.link_content(content)
-    link_usernames(link_urls(content))
-  end
-
-  private
-
-    def self.link_urls(text)
-      text.gsub %r{(\S+\.\w{2,3}(?:/\S+)?)}, '[\0](\0)'
-    end
-
-    def self.link_usernames(text)
-      text.gsub %r{@(\w+)}, '[\0](http://twitter.com/\1)'
-    end
 
 end
 
