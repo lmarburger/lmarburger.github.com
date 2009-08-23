@@ -61,6 +61,17 @@ category: tweet
       EOS
     end
 
+  class Git
+
+    def self.path=(path)
+      @@path = path
+    end
+
+    def self.execute(command)
+      `#{ @@path } #{ command }`
+    end
+  end
+
 end
 
 class AutoLink
@@ -81,14 +92,11 @@ class AutoLink
 
 end
 
-class Git
-  def self.execute(command)
-    `/usr/local/git/bin/git #{ command }`
-  end
-end
-
 # Change to the site's dir.
 Dir.chdir('/Users/Larry/Sites/lmarburger.github.com')
+
+# Set the path to the git binary.
+TwitterCacher::Git.path = '/usr/local/git/bin/git'
 
 # Update the latest tweets.
 TwitterCacher.new.update
