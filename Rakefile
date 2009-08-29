@@ -1,11 +1,17 @@
-#!/usr/bin/env ruby
-
 require 'rubygems'
 require 'grackle'
 
-class TwitterCacher
+task :update_tweets do
+  TweetsToJekyll.new.update_tweets
+end
 
-  def update
+
+# Set the path to the git binary.
+GIT_PATH = '/usr/local/git/bin/git'
+
+class TweetsToJekyll
+
+  def update_tweets
     new_tweets.each do |new_tweet|
       file_name = create_tweet_file_name new_tweet
       content = create_tweet_content new_tweet
@@ -21,12 +27,12 @@ class TwitterCacher
 
   private
 
-    def new_tweets
-      client.statuses.user_timeline.lmarburger.json(:since_id => tweet_ids.last)
-    end
-
     def client
       @client ||= Grackle::Client.new
+    end
+
+    def new_tweets
+      client.statuses.user_timeline.lmarburger.json(:since_id => tweet_ids.last)
     end
 
     def tweet_ids
@@ -70,7 +76,7 @@ category: tweet
     private
 
       def self.link_urls(text)
-        text.gsub %r{(\S+\.\w{2,3}(?:/\S+)?)}, '[\0](\0)'
+        text.gsub %r{(\S+\.[a-z]\w{1,2}(?:/\S+)?)}, '[\0](\0)'
       end
 
       def self.link_usernames(text)
@@ -81,22 +87,9 @@ category: tweet
 
   class Git
 
-    def self.path=(path)
-      @@path = path
-    end
-
     def self.execute(command)
-      `#{ @@path } #{ command }`
+      `#{ GIT_PATH } #{ command }`
     end
   end
 
 end
-
-# Change to the site's dir.
-Dir.chdir('/Users/Larry/Sites/lmarburger.github.com')
-
-# Set the path to the git binary.
-TwitterCacher::Git.path = '/usr/local/git/bin/git'
-
-# Update the latest tweets.
-TwitterCacher.new.update
