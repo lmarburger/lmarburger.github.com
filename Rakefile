@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'grackle'
 
+desc 'Update tweets'
 task :update_tweets do
   TweetsToJekyll.new.update_tweets
 end
