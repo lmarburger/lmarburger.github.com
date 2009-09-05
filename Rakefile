@@ -23,7 +23,7 @@ class TweetsToJekyll
       end
 
       Git.execute "add #{ file_name }"
-      Git.execute %{commit -m "Added a new tweet."}
+      Git.execute %{commit -m "Added a new tweet: http://twitter.com/lmarburger/status/#{ new_tweet.id }"}
     end
   end
 
