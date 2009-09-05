@@ -6,6 +6,7 @@ task :update_tweets do
   TweetsToJekyll.new.update_tweets
 end
 
+task :default => :update_tweets
 
 # Set the path to the git binary.
 GIT_PATH = '/usr/local/git/bin/git'
