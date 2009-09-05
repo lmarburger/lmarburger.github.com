@@ -90,7 +90,7 @@ category: tweet
   class Git
 
     def self.execute(command)
-      `#{ GIT_PATH } #{ command }`
+      system "#{ GIT_PATH } #{ command }"
     end
   end
 
