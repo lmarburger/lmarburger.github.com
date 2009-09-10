@@ -125,6 +125,6 @@ html, body { height: 100%; }
 #content { display: block; }
 #content #main { display: inline; float: left; margin-right: 20px; width: 540px; }
 * html #content #main { overflow-x: hidden; }
-#content #sidebar { display: inline; float: left; margin-right: 0; width: 220px; color: #666; }
+#content #sidebar { display: inline; float: left; margin-right: 0; width: 220px; padding-top: 36px; color: #666; }
 * html #content #sidebar { overflow-x: hidden; }
-#content #sidebar h2 { color: #666; font-weight: normal; margin: 36px 0 0.25em; }
+#content #sidebar h2 { color: #666; font-weight: normal; margin: 0 0 0.25em; }
