@@ -22,3 +22,25 @@
       :color #666
       :font-weight normal
       :margin 0 0 0.25em
+
+    #filter
+      +flatten_list
+      :margin-top 3em
+
+      li
+        :float left
+
+        a
+          :display block
+          :padding-left 36px
+          :font-size 1.5em
+          :background
+            :repeat no-repeat
+            :position 10px 50%
+
+          &.blog
+            :background-image= image_url("note.png")
+            :margin-right 10px
+
+          &.tweet
+            :background-image= image_url("tweet.png")

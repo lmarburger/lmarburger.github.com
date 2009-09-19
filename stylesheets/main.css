@@ -130,3 +130,8 @@ html, body { height: 100%; }
 #content #sidebar { display: inline; float: left; margin-right: 0; width: 220px; padding-top: 36px; color: #666; }
 * html #content #sidebar { overflow-x: hidden; }
 #content #sidebar h2 { color: #666; font-weight: normal; margin: 0 0 0.25em; }
+#content #sidebar #filter { margin: 0; list-style: none; margin-top: 3em; }
+#content #sidebar #filter li { float: left; }
+#content #sidebar #filter li a { display: block; padding-left: 36px; font-size: 1.5em; background-repeat: no-repeat; background-position: 10px 50%; }
+#content #sidebar #filter li a.blog { background-image: url('/images/note.png?1247678549'); margin-right: 10px; }
+#content #sidebar #filter li a.tweet { background-image: url('/images/tweet.png?1247678559'); }

@@ -1,0 +1,19 @@
+---
+layout: default
+title: Developmentastic
+---
+<ol id="entries">
+  {% for post in site.categories.tweet limit:20 %}
+    <li class="{{ post.category }}">
+      {% if post.category == 'tweet' %}
+        <a class="permalink" href="http://twitter.com/lmarburger/status/{{ post.title }}" title="View tweet">View tweet</a>
+      {% else %}
+        <a class="permalink" href="{{ post.url }}" title="{{ post.title | xml_escape }}">Permalink</a>
+        <h2><a href="{{ post.url }}" title="{{ post.title | xml_escape }}">{{ post.title | xml_escape }}</a></h2>
+      {% endif %}
+
+      {{ post.content }}
+    </li>
+  {% endfor %}
+</ol>
+
