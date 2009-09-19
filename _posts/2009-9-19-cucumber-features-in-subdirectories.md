@@ -20,9 +20,9 @@ Running the following command was exactly what I needed.
 
     cucumber --require features features/users/sign_in.feature
 
-This tells Cucumber to load all `*.rb` files under `features/` which finds my
-step definitions and support files. To save some typing, I created an alias in
-`~/.bashrc`.
+This tells Cucumber to load all `.rb` files under `features/` which will find
+the step definitions and support files. To save some typing, I created an alias
+in `~/.bashrc`.
 
     alias cuc='cucumber -r features'
 
