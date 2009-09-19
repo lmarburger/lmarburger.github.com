@@ -3,7 +3,7 @@ layout: default
 title: Developmentastic
 ---
 <ol id="entries">
-  {% for post in site.posts limit:10 %}
+  {% for post in site.posts limit:20 %}
     <li class="{{ post.category }}">
       {% if post.category == 'tweet' %}
         <a class="permalink" href="http://twitter.com/lmarburger/status/{{ post.title }}" title="View tweet">View tweet</a>
