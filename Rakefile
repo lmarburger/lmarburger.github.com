@@ -77,8 +77,10 @@ category: tweet
 
     private
 
+      URL_RE = %r{https?://\S+}x
+
       def self.link_urls(text)
-        text.gsub %r{(\S+\.[a-z]\w{1,2}(?:/\S+)?)}, '[\0](\0)'
+        text.gsub URL_RE, '[\0](\0)'
       end
 
       def self.link_usernames(text)
