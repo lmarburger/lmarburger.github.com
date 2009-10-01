@@ -72,19 +72,28 @@ category: tweet
   class AutoLink
 
     def self.link_content(content)
-      link_usernames(link_urls(content))
+      content = format_line_breaks content
+      content = link_urls content
+      link_usernames content
     end
 
     private
 
-      URL_RE = %r{https?://\S+}x
+      URL_RE = %r{ https?://\S+ }x
+      USERNAME_RE = %r{ @(\w+) }x
+
+      # Add two spaces to the end of the previous line when there is
+      # a line break in a tweet so Markdown will know we want a BR.
+      def self.format_line_breaks(text)
+        text.gsub %r{\n}, "  \n"
+      end
 
       def self.link_urls(text)
         text.gsub URL_RE, '[\0](\0)'
       end
 
       def self.link_usernames(text)
-        text.gsub %r{@(\w+)}, '[\0](http://twitter.com/\1)'
+        text.gsub USERNAME_RE, '[\0](http://twitter.com/\1)'
       end
 
   end
