@@ -5,39 +5,99 @@
     categories.find("li a").click(function(e) {
       e.preventDefault();
 
-      var selected = $(this).parent()
+      var
+        $link = $(this),
+        $parent = $link.parent();
 
-        // Unselect all siblings and their descendents.
-        .parent()
-          .find(".selected")
-            .removeClass("selected")
+      if ($parent.is(".last")) {
+
+        // Select leaf nodes
+        $link.siblings("input").click();
+      } else {
+
+        // Highlight this link's parent and reposition
+        // the categories list.
+        $parent
+
+          // Unselect all siblings and their descendants.
+          .parent()
+            .find(".highlighted")
+              .removeClass("highlighted")
+              .end()
             .end()
-          .end()
 
-        // Select the clicked element.
-        .addClass("selected");
+          // Select the clicked element.
+          .addClass("highlighted");
 
-      positionCategories();
+        positionCategories();
+      }
     });
 
+    // Add a selected class if the checkbox is checked.
+    categories.find("li :checkbox").click(function(e) {
+      var
+        $this = $(this),
+        checked = $this.is(":checked");
+
+      // If this event was fired by calling click(), this handler
+      // will be called before the checkbox is actually checked.
+      // If it was called by the user actually clicking on the input
+      // it will be in the expected state.
+      //
+      // I'm sure this will need some good old fashioned cross
+      // browser testing.
+      if (!e.originalTarget) {
+        checked = !checked;
+      }
+
+      setSelectedClass($this, checked);
+
+      // Check or uncheck descendants.
+      var selector = ":checkbox";
+      if (checked) {
+        selector += ":not(:checked)";
+      } else {
+        selector += ":checked";
+      }
+
+      // Set descendant checkboxs' states without trigger this click
+      // handler on each one.
+      $this.siblings("ol").find(selector).each(function() {
+        this.checked = checked;
+        setSelectedClass($(this), checked);
+      });
+
+      // Mark the parents as having a selected descendant.
+      $this.closest("ol")
+        .parents("li").each(function() {
+          var checkedDescendants = !!$(this).find(":checkbox:checked").length;
+          $(this).toggleClass("descendant_selected", checkedDescendants);
+        });
+
+      function setSelectedClass(link, checked) {
+        link.parent().toggleClass("selected", checked);
+      }
+    });
+
+    // Move back through the category hierarchy.
     $("#back").click(function(e){
       e.preventDefault();
 
-      var selected = categories.find(".selected");
-      if (selected.length == 0) {
+      var highlighted = categories.find(".highlighted");
+      if (highlighted.length == 0) {
         return;
       }
 
       var
-        leftmostLevel = selected.length - 1,
-        deepestSelected = $(selected[leftmostLevel]);
+        leftmostLevel = highlighted.length - 1,
+        deepestHighlighted = $(highlighted[leftmostLevel]);
 
-      deepestSelected.removeClass("selected");
+      deepestHighlighted.removeClass("highlighted");
 
-      // If the deepest selected element has no children, go
+      // If the deepest highlighted element has no children, go
       // back to the grandparent.
-      if (deepestSelected.is(".last")) {
-        $(selected[leftmostLevel - 1]).removeClass("selected");
+      if (deepestHighlighted.is(".last")) {
+        $(highlighted[leftmostLevel - 1]).removeClass("highlighted");
       }
 
       positionCategories();
@@ -45,13 +105,13 @@
 
     function positionCategories() {
       var
-        selectedLevels = categories.find(".selected"),
-        leftmostLevel = selectedLevels.length - 1,
-        deepestSelected = $(selectedLevels[leftmostLevel]);
+        highlightedLevels = categories.find(".highlighted"),
+        leftmostLevel = highlightedLevels.length - 1,
+        deepestHighlighted = $(highlightedLevels[leftmostLevel]);
 
-      // If the deepest selected element has no children, the
+      // If the deepest highlighted element has no children, the
       // leftmost node should be its grandparent.
-      if (deepestSelected.is(".last")) {
+      if (deepestHighlighted.is(".last")) {
         leftmostLevel -= 1;
       }
 

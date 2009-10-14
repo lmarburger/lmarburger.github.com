@@ -39,9 +39,15 @@ body {
   margin: 20px auto;
   padding-top: 5px;
   width: 625px;
-  height: 735px;
+  height: 740px;
   overflow: hidden;
 }
+
+  #categories input {
+    display: block;
+    float: left;
+    margin: 7px 5px 5px;
+  }
 
   #categories a {
     padding: 5px;
@@ -51,7 +57,7 @@ body {
   }
 
     #categories a:hover {
-      background-color: #ddd !important;
+      background-color: #ddd;
     }
 
     #categories a span {
@@ -59,7 +65,10 @@ body {
     }
 
     #categories a#back {
+      display: block;
+      float: left;
       margin-left: 5px;
+      padding: 3px 5px;
       background: none;
     }
 
@@ -74,7 +83,7 @@ body {
   }
 
     #categories > ol {
-      top: 25px;
+      top: 30px;
     }
 
     #categories ol li {
@@ -95,20 +104,33 @@ body {
           display: none;
         }
 
-      #categories ol li.selected > a {
-        background-color: #607B90 !important;
-        color: #fff;
+      #categories ol li.highlighted > a span {
+        color: #333 !important;
       }
 
-      #categories ol li.selected > a span {
-        color: #fff;
+      #categories ol li.descendant_selected > a {
+        background-color: #8ab0cf;
       }
+
+      #categories ol li.selected > a {
+        background-color: #607B90;
+      }
+
+        #categories ol li.selected > a,
+        #categories ol li.descendant_selected > a {
+          color: #fff;
+        }
+
+          #categories ol li.selected > a span,
+          #categories ol li.descendant_selected > a span {
+            color: #fff;
+          }
 
   #categories ol ol {
     margin-left: 305px;
     display: none;
   }
 
-    #categories ol li.selected > ol {
+    #categories ol li.highlighted > ol {
       display: block;
     }
