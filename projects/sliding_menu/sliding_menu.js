@@ -35,47 +35,51 @@
 
     // Add a selected class if the checkbox is checked.
     categories.find("li :checkbox").click(function(e) {
-      var
-        $this = $(this),
-        checked = $this.is(":checked");
+      var $this = $(this);
 
-      // If this event was fired by calling click(), this handler
-      // will be called before the checkbox is actually checked.
-      // If it was called by the user actually clicking on the input
-      // it will be in the expected state.
-      //
-      // I'm sure this will need some good old fashioned cross
-      // browser testing.
-      if (!e.originalTarget) {
-        checked = !checked;
-      }
+      // Defer executing this script until after the handler has completey
+      // fired. There seems to be some inconsistencies between the state
+      // of the checkbox between clicking it direclty and calling click()
+      // programatically. Pushing the handler execution to the bottom of
+      // the stack should make both methods consistent.
+      setTimeout(function() {
+        var checked = $this.is(":checked");
 
-      setSelectedClass($this, checked);
+        setSelectedClass($this, checked);
 
-      // Check or uncheck descendants.
-      var selector = ":checkbox";
-      if (checked) {
-        selector += ":not(:checked)";
-      } else {
-        selector += ":checked";
-      }
+        // Check or uncheck descendants.
+        var selector = ":checkbox";
+        if (checked) {
+          selector += ":not(:checked)";
+        } else {
+          selector += ":checked";
+        }
 
-      // Set descendant checkboxs' states without trigger this click
-      // handler on each one.
-      $this.siblings("ol").find(selector).each(function() {
-        this.checked = checked;
-        setSelectedClass($(this), checked);
-      });
+        var children = $this.siblings("ol");
 
-      // Mark the parents as having a selected descendant.
-      $this.closest("ol")
-        .parents("li").each(function() {
-          var checkedDescendants = !!$(this).find(":checkbox:checked").length;
-          $(this).toggleClass("descendant_selected", checkedDescendants);
+        // Set descendant checkboxs' states without triggering this
+        // click handler on each one.
+        children.find(selector).each(function() {
+          this.checked = checked;
+          setSelectedClass($(this), checked);
         });
 
+        // Mark the parents as having a selected descendant.
+        $this.closest("ol")
+          .parents("li").each(function() {
+            var checkedDescendants = !!$(this).find(":checkbox:checked").length;
+            $(this).toggleClass("descendant_selected", checkedDescendants);
+          });
+
+      }, 10);
+
       function setSelectedClass(link, checked) {
-        link.parent().toggleClass("selected", checked);
+        var parent = link.parent().toggleClass("selected", checked);
+
+        // Also remove the descendant selected class.
+        if (!checked) {
+          parent.removeClass("descendant_selected");
+        }
       }
     });
 
