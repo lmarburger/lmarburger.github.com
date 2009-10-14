@@ -15,6 +15,9 @@
         $link.siblings("input").click();
       } else {
 
+        console.log($parent.position());
+        $parent.children("ol").css({ top: $parent.position().top });
+
         // Highlight this link's parent and reposition
         // the categories list.
         $parent

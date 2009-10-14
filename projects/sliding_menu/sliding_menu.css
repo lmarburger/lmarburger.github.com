@@ -35,12 +35,12 @@ body {
 
 #categories {
   background-color: #fff;
-  position: relative;
   margin: 20px auto;
-  padding-top: 5px;
-  width: 625px;
-  height: 740px;
-  overflow: hidden;
+
+  width: 640px;
+  height: 300px;
+  overflow: auto;
+  overflow-x: hidden;
 }
 
   #categories input {
@@ -78,12 +78,11 @@ body {
 
   #categories ol {
     list-style: none;
-    position: absolute;
-    top: 0;
   }
 
     #categories > ol {
-      top: 30px;
+      clear: left;
+      position: relative;
     }
 
     #categories ol li {
@@ -127,8 +126,10 @@ body {
           }
 
   #categories ol ol {
-    margin-left: 305px;
     display: none;
+    position: absolute;
+    margin-left: 305px;
+    top: 0;
   }
 
     #categories ol li.highlighted > ol {
