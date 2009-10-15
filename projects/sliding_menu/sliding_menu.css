@@ -47,8 +47,6 @@ body {
 }
 
   #categories a {
-    padding: 5px;
-    background-color: #eee;
     color: inherit;
     text-decoration: none;
   }
@@ -57,21 +55,13 @@ body {
       background-color: #ddd;
     }
 
-    #categories a span {
-      color: #aaa;
-    }
-
     #categories a#back {
       display: block;
       float: left;
       margin-left: 5px;
-      padding: 3px 5px 0;
-      background: none;
+      padding: 0 5px 0 15px;
+      background: url(images/left.png) no-repeat 0 center;
     }
-
-      #categories a#back span {
-        margin-right: 5px;
-      }
 
   #categories ol {
     list-style: none;
@@ -105,20 +95,17 @@ body {
 
       #categories ol li a {
         display: block;
-        width: 295px;
+        width: 285px;
+        padding: 5px 15px 5px 5px;
+        background: url(images/right.png) #eee no-repeat 292px center;
       }
 
-        #categories ol li a span {
-          display: block;
-          float: right;
+        #categories ol li.highlighted > a {
+          background-image: url(images/right-selected.png);
         }
 
-      #categories ol li.last a span {
-        display: none;
-      }
-
-      #categories ol li.highlighted > a span {
-        color: #333 !important;
+      #categories ol li.last a {
+        background-image: none;
       }
 
       #categories ol li.descendant_selected > a {
@@ -133,8 +120,3 @@ body {
         #categories ol li.descendant_selected > a {
           color: #fff;
         }
-
-          #categories ol li.selected > a span,
-          #categories ol li.descendant_selected > a span {
-            color: #fff;
-          }
