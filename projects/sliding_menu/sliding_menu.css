@@ -34,20 +34,17 @@ body {
 --------------------------------------------------------------------------- */
 
 #categories {
+  width: 640px;
   background-color: #fff;
   margin: 20px auto;
-
-  width: 640px;
-  height: 300px;
-  overflow: auto;
-  overflow-x: hidden;
 }
 
-  #categories input {
-    display: block;
-    float: left;
-    margin: 7px 5px 5px;
-  }
+#category_items {
+  height: 315px;
+  overflow: auto;
+  overflow-x: hidden;
+  clear: left;
+}
 
   #categories a {
     padding: 5px;
@@ -68,40 +65,57 @@ body {
       display: block;
       float: left;
       margin-left: 5px;
-      padding: 3px 5px;
+      padding: 3px 5px 0;
       background: none;
     }
 
-    #categories a#back span {
-      margin-right: 5px;
-    }
+      #categories a#back span {
+        margin-right: 5px;
+      }
 
   #categories ol {
     list-style: none;
   }
 
-    #categories > ol {
+    #categories ol.root {
       clear: left;
       position: relative;
     }
 
+      #categories ol ol {
+        display: none;
+        position: absolute;
+        margin-left: 305px;
+        top: 0;
+      }
+
+        #categories ol li.highlighted > ol {
+          display: block;
+        }
+
     #categories ol li {
       margin: 5px;
     }
+
+      #categories ol li input {
+        display: block;
+        float: left;
+        margin: 7px 5px 5px;
+      }
 
       #categories ol li a {
         display: block;
         width: 295px;
       }
 
-      #categories ol li a span {
-        display: block;
-        float: right;
-      }
-
-        #categories ol li.last a span {
-          display: none;
+        #categories ol li a span {
+          display: block;
+          float: right;
         }
+
+      #categories ol li.last a span {
+        display: none;
+      }
 
       #categories ol li.highlighted > a span {
         color: #333 !important;
@@ -124,14 +138,3 @@ body {
           #categories ol li.descendant_selected > a span {
             color: #fff;
           }
-
-  #categories ol ol {
-    display: none;
-    position: absolute;
-    margin-left: 305px;
-    top: 0;
-  }
-
-    #categories ol li.highlighted > ol {
-      display: block;
-    }

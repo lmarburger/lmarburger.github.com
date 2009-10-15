@@ -1,6 +1,6 @@
 (function($) {
   $(function() {
-    var categories = $("#categories > ol");
+    var categories = $("#category_items > ol");
 
     categories.find("li a").click(function(e) {
       e.preventDefault();
@@ -15,7 +15,6 @@
         $link.siblings("input").click();
       } else {
 
-        console.log($parent.position());
         $parent.children("ol").css({ top: $parent.position().top });
 
         // Highlight this link's parent and reposition
