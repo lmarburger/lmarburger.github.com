@@ -35,8 +35,11 @@ body {
 
 #categories {
   width: 640px;
+
+  /* Custom */
   background-color: #fff;
   margin: 20px auto;
+  padding-top: 5px;
 }
 
 #category_items {
