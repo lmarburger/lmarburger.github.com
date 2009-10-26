@@ -35,6 +35,7 @@ body {
 
 #categories {
   width: 640px;
+  position: relative;
 
   /* Custom */
   background-color: #fff;
@@ -42,11 +43,16 @@ body {
   padding-top: 5px;
 }
 
+  #categories form {
+    float: right;
+    margin-right: 18px;
+  }
+
 #category_items {
   height: 315px;
   overflow: auto;
   overflow-x: hidden;
-  clear: left;
+  clear: both;
 }
 
   #categories a {
@@ -69,6 +75,33 @@ body {
   #categories ol {
     list-style: none;
   }
+
+    #categories #category_search {
+      background-color: #eee;
+      border: 3px solid #666;
+      position: absolute;
+      top: 27px;
+      right: 18px;
+    }
+
+    #categories #category_search li {
+      margin: 0;
+    }
+
+    #categories #category_search a {
+      padding: 3px 3px 3px 5px;
+      line-height: 1.5em;
+      background: none;
+      font-size: 11px;
+      width: 200px;
+    }
+
+      #categories #category_search a:hover {
+        background: #8AB0CF;
+        color: #fff;
+        font-size: 11px;
+        width: 200px;
+      }
 
     #categories ol.root {
       clear: left;
