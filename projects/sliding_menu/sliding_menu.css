@@ -30,7 +30,7 @@ body {
 
 
 /* ---------------------------------------------------------------------------
-  =category selection
+	=category selection
 --------------------------------------------------------------------------- */
 
 #categories {
@@ -43,10 +43,21 @@ body {
   padding-top: 5px;
 }
 
-  #categories form {
+  #categories #categories_search {
     float: right;
     margin-right: 18px;
   }
+
+    #categories #categories_search label {
+      font-size: 11px;
+      margin-right: 5px;
+    }
+
+    #categories #categories_search input {
+      font-size: 11px;
+      margin: 0;
+      padding: 0;
+    }
 
 #category_items {
   height: 315px;
@@ -54,6 +65,10 @@ body {
   overflow-x: hidden;
   clear: both;
 }
+
+  #categories span.keywords {
+    display: none;
+  }
 
   #categories a {
     color: inherit;
@@ -69,26 +84,26 @@ body {
       float: left;
       margin-left: 5px;
       padding: 0 5px 0 13px;
-      background: url(images/left.png) no-repeat 0 center;
+      background: url(images/arrows/left.png) no-repeat 0 center;
     }
 
   #categories ol {
     list-style: none;
   }
 
-    #categories #category_search {
+    #categories #category_search_results {
       background-color: #eee;
       border: 3px solid #666;
       position: absolute;
-      top: 27px;
+      top: 20px;
       right: 18px;
     }
 
-    #categories #category_search li {
+    #categories #category_search_results li {
       margin: 0;
     }
 
-    #categories #category_search a {
+    #categories #category_search_results a {
       padding: 3px 3px 3px 5px;
       line-height: 1.5em;
       background: none;
@@ -96,7 +111,7 @@ body {
       width: 200px;
     }
 
-      #categories #category_search a:hover {
+      #categories #category_search_results a:hover {
         background: #8AB0CF;
         color: #fff;
         font-size: 11px;
@@ -133,11 +148,11 @@ body {
         display: block;
         width: 285px;
         padding: 5px 15px 5px 5px;
-        background: url(images/right.png) #eee no-repeat 292px center;
+        background: url(images/arrows/right.png) #eee no-repeat 292px center;
       }
 
         #categories ol li.highlighted > a {
-          background-image: url(images/right-selected.png);
+          background-image: url(images/arrows/right-selected.png);
         }
 
       #categories ol li.last a {
