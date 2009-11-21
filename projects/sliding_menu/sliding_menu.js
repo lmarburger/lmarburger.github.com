@@ -268,8 +268,9 @@
     }
   });
 
-  // Let's add reverse().
-  $.fn.reverse = Array.prototype.reverse;
+  // Let's add reverse(). Prototype hijacks the real reverse mehtod,
+  // so check to see if _reverse() exists and use that instead.
+  $.fn.reverse = (Array.prototype._reverse || Array.prototype.reverse);
 
   // Watches the selected input for changes and searches through
   // the given list for matched items. If any are found, the
