@@ -1,45 +1,25 @@
 (function($) {
   $(function() {
+
     var categories = $("#category_items > ol")
-      .bind("reposition", reposition)
-      .bind("clear", clearHighlighted);
 
-    categories
-
-      // Highlight clicked category.
-      .find("a")
-        .click(highlightCategory)
-        .end()
-
-      // Select checked category.
-      .find(":checkbox")
-        .click(selectCategory)
-        .end()
+      // Handle category or checkbox clicks.
+      .click(categoriesClicked)
 
       // Listen for some custom events.
-      .find("li")
-        .bind("highlight", [], categoryHighlighted)
-        .bind("unhighlight", categoryUnhighlighted)
-        .bind("select", categorySelected)
-        .bind("deselect", categoryDeselected);
-
+      .bind("reposition", reposition)
+      .bind("clear", clearHighlighted)
+      .bind("highlight", categoryHighlighted)
+      .bind("unhighlight", categoryUnhighlighted)
+      .bind("select", categorySelected)
+      .bind("deselect", categoryDeselected);
 
     // Move back through the category hierarchy.
     $("#back").click(moveBack);
 
-    // Search
-    var searchResults = $('<ol id="category_search_results" />')
-      .hide()
-      .appendTo($("#categories"));
-
     $("#categories_search input")
-      .listSearch($("ol.root"))
       .bind("search", showMatches)
-      .focus(function() {
-        if (searchResults.children("li").length) {
-          searchResults.show();
-        }
-      });
+      .focus(showSearchResults);
 
       // I'd like to hide the search results on blur, but
       // blur is also triggered on mousedown when clicking
@@ -54,9 +34,9 @@
       //});
 
 
-    /*************
-     * Handlers
-     *************/
+    /******************
+     * Category List
+     ******************/
 
     // Scroll the highlighted element into position.
     function reposition() {
@@ -75,6 +55,39 @@
           .animate({ scrollTop: top });
     }
 
+    function moveBack(e) {
+      e.preventDefault();
+
+      var highlighted = categories.find(".highlighted");
+      if (highlighted.length) {
+
+        // Unhighlight the deepest element.
+        highlighted.eq(highlighted.length - 1)
+          .trigger("unhighlight")
+          .trigger("reposition");
+      }
+    }
+
+
+    /******************
+     * Category Items
+     ******************/
+
+    // Handle clicks on the catgories menu to select/deselect categories.
+    function categoriesClicked(e) {
+        var target = $(e.target);
+        if (target.is("a")) {
+
+          // Category was clicked
+          e.preventDefault();
+          highlightCategory(target);
+        } else if (target.is(":checkbox")) {
+
+          // Checkbox was clicked
+          selectCategory(target);
+        }
+    }
+
     // Clear all highlighted categories.
     function clearHighlighted() {
       $(this).find(".highlighted").trigger("unhighlight");
@@ -90,10 +103,8 @@
     }
 
     // Highlight a category to show its children.
-    function highlightCategory(e) {
-      e.preventDefault();
-
-      var parent = $(this).parent()
+    function highlightCategory(category) {
+      var parent = category.parent()
         .trigger("highlight")
         .trigger("reposition");
 
@@ -105,8 +116,7 @@
     }
 
     // Check a category.
-    function selectCategory(e) {
-      var checkbox = $(this);
+    function selectCategory(checkbox) {
 
       // Defer executing this script until after the handler has completey
       // fired. There seems to be some inconsistencies between the state
@@ -120,106 +130,97 @@
 
     function categoryHighlighted(e) {
 
-      // The problem this is attempting to solve is this event basically
-      // needs to be done in the capture phase. A highlighted element's
-      // ancestors must be visible first so the positioning can be
-      // calculated.
-      //
-      // I'm using the event data object for something it wasn't intended,
-      // but I need a way to bubble data up the hierarchy.
+      // Unhighlight all currently highlighted categories.
+      categories.trigger("clear");
 
-      var item = $(this);
-      e.data.unshift(item);
+      // In order to highlight the selected category, all its ancestors must
+      // be visible first in order for the positionioning to be calculated.
+      // Find all parent LIs in the categories list and sort them so the
+      // outermost LI is first and the target for this event is last.
+      $(e.target).parents("ol.root li").reverse().andSelf()
+        .each(function() {
+          var item = $(this);
 
-      // Break unless this is the last element in the hierarchy.
-      if (!item.parent().is(".root")) { return; }
+          // Don't highlight leaves.
+          if (!item.is(".last")) {
+            item
 
-      while (e.data.length) {
-        var item = e.data.shift();
+              // Position children in line with the parent.
+              .children("ol")
+                .css({ top: item.position().top })
+                .end()
 
-        // Unselect all siblings and their descendants.
-        item
-          .parent()
-            .find(".highlighted")
-              .trigger("unhighlight")
-              .end()
-            .end()
-
-        // Don't highlight leaves.
-        if (!item.is(".last")) {
-          item
-
-            // Position children in line with the parent.
-            .children("ol")
-              .css({ top: item.position().top })
-              .end()
-
-            // Select the clicked element.
-            .addClass("highlighted");
-        }
-      }
+              // Highlight the clicked element.
+              .addClass("highlighted");
+          }
+        });
     }
 
     function categoryUnhighlighted(e) {
-      e.stopPropagation();
-      $(this).removeClass("highlighted");
+      $(e.target).removeClass("highlighted");
     }
 
     function categorySelected(e) {
-      var item = $(this);
-      if (e.target == this) {
+      var item = $(e.target);
 
-        // This is the event's target so make sure it's checked.
-        item.children("input")[0].checked = true;
-        item.addClass("selected");
+      // Indicate a descendant was selected on all ancestors.
+      item.parents("ol.root li").addClass("descendant_selected");
 
-        // Propagate this event down the tree to select all of
-        // this category's descendants.
-        var descendants = item.find("li");
-        $.each(item.find("> ol li"), function() {
-          $(this).trigger("select");
-        });
-      } else {
+      // Make sure this category is checked.
+      item.children("input")[0].checked = true;
+      item.addClass("selected");
 
-        // A descendant was selected.
-        item.addClass("descendant_selected");
-      }
+      // Propagate this event down the tree to select all of
+      // this category's descendants.
+      var descendants = item.find("li");
+      $.each(item.find("> ol li"), function() {
+        $(this).trigger("select");
+      });
     }
 
     function categoryDeselected(e) {
-      var item = $(this);
-      if (e.target == this) {
+      var item = $(e.target);
 
-        // This is the event's target so make sure it's unchecked.
-        item.children("input")[0].checked = false;
-        item.removeClass("selected");
+      // Make sure this category is unchecked.
+      item.children("input")[0].checked = false;
+      item.removeClass("selected");
 
-        // Propagate this event down the tree to deselect all of
-        // this category's descendants.
-        var descendants = item.find("li");
-        $.each(item.find("> ol li"), function() {
-          $(this).trigger("deselect");
-        });
-      } else {
+      // Propagate this event down the tree to deselect all of
+      // this category's descendants.
+      var descendants = item.find("li");
+      $.each(item.find("> ol li"), function() {
+        $(this).trigger("deselect");
+      });
 
-        // A descendant was unselected so check to see if any
-        // other descendants are selected.
+      // Check all parent elements and update their descendant
+      // selected status.
+      item.parents("ol.root li").each(function() {
+        var item = $(this);
         if (!item.find(".selected").length) {
           item.removeClass("descendant_selected");
         }
-      }
+      });
     }
 
-    function moveBack(e) {
-      e.preventDefault();
 
-      var highlighted = categories.find(".highlighted");
-      if (highlighted.length) {
+    /******************
+     * Search
+     ******************/
 
-        // Unhighlight the deepest element.
-        highlighted.eq(highlighted.length - 1)
-          .trigger("unhighlight")
-          .trigger("reposition");
+    var searchResults;
+    function prepareSearch(input) {
+      searchResults = $('<ol id="category_search_results" />')
+        .hide()
+        .appendTo($("#categories"));
+
+      input.listSearch($("ol.root"));
+    }
+
+    function showSearchResults(e) {
+      if (!searchResults) {
+        prepareSearch($(this));
+      } else if (searchResults.children("li").length) {
+        searchResults.show();
       }
     }
 
@@ -265,8 +266,10 @@
     if (Element && Element.addMethods) {
       Element.addMethods({ highlight: function() {} });
     }
-
   });
+
+  // Let's add reverse().
+  $.fn.reverse = Array.prototype.reverse;
 
   // Watches the selected input for changes and searches through
   // the given list for matched items. If any are found, the
@@ -274,23 +277,37 @@
   $.fn.extend({
     listSearch: function(list) {
       list = $(list);
+      var input = this;
 
       if (list.length) {
         var
-          previousSearch,
           items = list.find("li"),
-          terms = items.children("a").map(function() {
-            var category = $(this);
-            return [
-              category.text(),
-              category.siblings(".keywords").text()
-            ].join(' ').toLowerCase();
-          });
+          terms = [],
+          count = 0,
+          total = items.length,
+          previousSearch;
 
-        this.keyup(search)
+        items.map(function() {
+          var item = $(this);
+          setTimeout(function() { addSearchTerm(item); }, 0);
+        });
       }
 
       return this;
+
+      function addSearchTerm(item) {
+        var category = item.children("a");
+        terms.push([
+          category.text(),
+          category.siblings(".keywords").text()
+        ].join(" ").toLowerCase());
+
+        if (++count == total) {
+          terms = $(terms);
+          input.keyup(search);
+          search();
+        }
+      }
 
       function search() {
         var
