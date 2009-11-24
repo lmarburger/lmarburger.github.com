@@ -1,37 +1,39 @@
 (function($) {
   $(function() {
 
-    var categories = $("#category_items > ol")
+    var
+      selectedCategories = $("#selected_categories ul"),
+      categories = $("#category_items > ol")
 
-      // Handle category or checkbox clicks.
-      .click(categoriesClicked)
+        // Handle category or checkbox clicks.
+        .click(categoriesClicked)
 
-      // Listen for some custom events.
-      .bind("reposition", reposition)
-      .bind("clear", clearHighlighted)
-      .bind("highlight", categoryHighlighted)
-      .bind("unhighlight", categoryUnhighlighted)
-      .bind("select", categorySelected)
-      .bind("deselect", categoryDeselected);
+        // Listen for some custom events.
+        .bind("reposition", reposition)
+        .bind("clear", clearHighlighted)
+        .bind("highlight", categoryHighlighted)
+        .bind("unhighlight", categoryUnhighlighted)
+        .bind("select", categorySelected)
+        .bind("deselect", categoryDeselected);
 
-    // Move back through the category hierarchy.
-    $("#back").click(moveBack);
+      // Move back through the category hierarchy.
+      $("#back").click(moveBack);
 
-    $("#categories_search input")
-      .bind("search", showMatches)
-      .focus(showSearchResults);
+      $("#categories_search input")
+        .bind("search", showMatches)
+        .focus(showSearchResults);
 
-      // I'd like to hide the search results on blur, but
-      // blur is also triggered on mousedown when clicking
-      // on a result. That means the results are hidden before
-      // click can fire. That doens't work so well.
-      //.blur(function() {
-        //window.setTimeout(function() {
-          //if (searchResults.is(":visible")) {
-            //searchResults.hide();
-          //}
-        //}, 10);
-      //});
+        // I'd like to hide the search results on blur, but
+        // blur is also triggered on mousedown when clicking
+        // on a result. That means the results are hidden before
+        // click can fire. That doens't work so well.
+        //.blur(function() {
+          //window.setTimeout(function() {
+            //if (searchResults.is(":visible")) {
+              //searchResults.hide();
+            //}
+          //}, 10);
+        //});
 
 
     /******************
@@ -46,7 +48,7 @@
         deepestHighlighted = highlightedLevels.eq(leftmostLevel);
 
       var
-        left = Math.min(leftmostLevel * -310, 0),
+        left = Math.min(leftmostLevel * -315, 0),
         top = categoryTopPosition(deepestHighlighted);
 
       categories
@@ -75,17 +77,17 @@
 
     // Handle clicks on the catgories menu to select/deselect categories.
     function categoriesClicked(e) {
-        var target = $(e.target);
-        if (target.is("a")) {
+      var target = $(e.target);
+      if (target.is("a")) {
 
-          // Category was clicked
-          e.preventDefault();
-          highlightCategory(target);
-        } else if (target.is(":checkbox")) {
+        // Category was clicked
+        e.preventDefault();
+        highlightCategory(target);
+      } else if (target.is(":checkbox")) {
 
-          // Checkbox was clicked
-          selectCategory(target);
-        }
+        // Checkbox was clicked
+        selectCategory(target);
+      }
     }
 
     // Clear all highlighted categories.
@@ -160,8 +162,12 @@
       $(e.target).removeClass("highlighted");
     }
 
-    function categorySelected(e) {
-      var item = $(e.target);
+    function categorySelected(e, options) {
+      options = options || {}
+
+      var
+        item = $(e.target),
+        selectChildren = (options.selectChildren == null ? true : false);
 
       // Indicate a descendant was selected on all ancestors.
       item.parents("ol.root li").addClass("descendant_selected");
@@ -170,12 +176,64 @@
       item.children("input")[0].checked = true;
       item.addClass("selected");
 
-      // Propagate this event down the tree to select all of
-      // this category's descendants.
-      var descendants = item.find("li");
-      $.each(item.find("> ol li"), function() {
-        $(this).trigger("select");
+      // Add this category to the list of selected categories.
+      var selectedCategory = $("<li/>")
+        .append(
+          $("<input type='checkbox' checked='checked' />")
+
+            // Deselect this category when the checkbox is unchecked.
+            .click(function() {
+              setTimeout(function() {
+                if (!$(e.target).is(":checked")) {
+                  item.trigger("deselect");
+                }
+              }, 0);
+            })
+        )
+
+        .append(
+          item.children("a").clone()
+
+            // Show and scroll to this category.
+            .click(function(e) {
+              e.preventDefault();
+
+              item.trigger("highlight")
+              categories.trigger("reposition");
+            })
+        );
+
+      selectedCategories
+        .append(selectedCategory)
+        .parent()
+          .removeClass("empty");
+
+      // Remove this item from the list of selected categories when the
+      // category is deselected.
+      item.bind("deselect", function(e) {
+
+        // Only act if this category was deselected and not just a descendant.
+        if (e.target == item[0]) {
+          selectedCategory.remove();
+
+          // Mark the selected categories container as empty if necessary.
+          if (!selectedCategories.children("li").length) {
+            selectedCategories.parent().addClass("empty");
+          }
+
+          item.unbind("deselect", arguments.callee);
+        }
       });
+
+      if (selectChildren) {
+
+        // Propagate this event down the tree to select all of
+        // this category's descendants.
+        var descendants = item.find("li");
+        $.each(item.find("> ol li"), function() {
+          $(this).trigger("select");
+        });
+      }
     }
 
     function categoryDeselected(e) {
