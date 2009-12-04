@@ -43,135 +43,157 @@ body {
   padding: 10px;
 }
 
-  #categories #categories_search {
+  #categories ol {
+    list-style: none;
+    border: 1px solid #f0f;
+  }
+
+    #categories a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+      #categories a#back {
+        display: block;
+        float: left;
+        margin-left: 5px;
+        padding: 0 5px 0 13px;
+        background: url(images/arrows/left.png) no-repeat 0 center;
+      }
+
+        #categories a#back:hover {
+          background-color: #eee;
+        }
+
+  /* Search form */
+  #categories_search {
     float: right;
     margin-right: 18px;
   }
 
-    #categories #categories_search label {
+    #categories_search label {
       font-size: 11px;
       margin-right: 5px;
     }
 
-    #categories #categories_search input {
+    #categories_search input {
       font-size: 11px;
       margin: 0;
       padding: 0;
     }
+
+  /* Search results */
+  #category_search_results {
+    background-color: #eee;
+    border: 3px solid #666;
+    position: absolute;
+    top: 20px;
+    right: 18px;
+  }
+
+  #category_search_results li {
+    margin: 0;
+  }
+
+  #category_search_results a {
+    padding: 3px 3px 3px 5px;
+    line-height: 1.5em;
+    background: none;
+    font-size: 11px;
+    width: 200px;
+  }
+
+    #category_search_results a:hover {
+      background: #8AB0CF;
+      color: #fff;
+      font-size: 11px;
+      width: 200px;
+    }
+
 
 #category_items {
   height: 304px;
   overflow: auto;
   overflow-x: hidden;
   clear: both;
+
+  /* IE */
+  position: relative;
 }
 
-  #categories span.keywords {
+  #category_items span.keywords {
     display: none;
   }
 
-  #categories a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-    #categories a:hover {
-      background-color: #eee;
-    }
-
-    #categories a#back {
-      display: block;
-      float: left;
-      margin-left: 5px;
-      padding: 0 5px 0 13px;
-      background: url(images/arrows/left.png) no-repeat 0 center;
-    }
-
-  #categories ol {
-    list-style: none;
-  }
-
-    /* Search results */
-    #categories #category_search_results {
-      background-color: #eee;
-      border: 3px solid #666;
-      position: absolute;
-      top: 20px;
-      right: 18px;
-    }
-
-    #categories #category_search_results li {
-      margin: 0;
-    }
-
-    #categories #category_search_results a {
-      padding: 3px 3px 3px 5px;
-      line-height: 1.5em;
-      background: none;
-      font-size: 11px;
-      width: 200px;
-    }
-
-      #categories #category_search_results a:hover {
-        background: #8AB0CF;
-        color: #fff;
-        font-size: 11px;
-        width: 200px;
-      }
-
-    /* Category items */
-    #categories ol.root {
-      clear: left;
+    #category_items ol.root {
       position: relative;
     }
 
-      #categories ol ol {
+      #category_items ol.root li {
+        line-height: 0;
+      }
+
+      #category_items ol ol {
         display: none;
+        visibility: hidden;
         position: absolute;
         margin-left: 315px;
         top: 0;
       }
 
-        #categories ol li.highlighted > ol {
+        #category_items ol li.highlighted > ol {
           display: block;
+          border: 1px solid #f0f;
+          visibility: visible;
         }
 
-      #categories ol li input {
-        display: block;
-        float: left;
-        margin: 7px 5px 0px;
+      #category_items .category_item {
+        width: 305px;
+        border-top: 1px solid #eee;
       }
 
-      #categories ol li a {
+      #category_items .category_item input {
+        display: block;
+        float: left;
+        margin-top: 7px;
+        margin-bottom: 7px;
+        /*margin: 7px 5px 0px;*/
+      }
+
+      #category_items .category_item a {
         display: block;
         width: 285px;
         padding: 5px 15px 5px 5px;
         background: url(images/arrows/right.png) no-repeat 292px center;
-        border-top: 1px solid #eee;
+        line-height: 1.5em;
       }
 
-        #categories ol li:first-child > a {
+        #categories .category_item a:hover {
+          background-color: #eee;
+        }
+
+        #category_items ol li:first-child > .category_item {
           border: none;
         }
 
-        #categories ol li.highlighted > a {
+        #category_items ol li.highlighted > .category_item a {
           background-image: url(images/arrows/right-selected.png);
         }
 
-      #categories ol li.last a {
+      #category_items ol li.last a {
         background-image: none;
       }
 
-      #categories ol li.descendant_selected > a {
+      #category_items ol li.descendant_selected > .category_item a {
         background-color: #8ab0cf;
       }
 
-      #categories ol li.selected > a {
+      #category_items ol li.selected > .category_item a {
         background-color: #607B90;
       }
 
-        #categories ol li.selected > a,
-        #categories ol li.descendant_selected > a {
+        #category_items ol li.selected > .category_item a,
+        #category_items ol li.descendant_selected > .category_item a {
           color: #fff;
         }
 
@@ -200,137 +222,3 @@ body {
     #selected_categories ul a:hover {
       background: none;
     }
-
-/*#categories {*/
-  /*width: 640px;*/
-  /*position: relative;*/
-/*}*/
-
-  /*#categories #categories_search {*/
-    /*float: right;*/
-    /*margin-right: 18px;*/
-  /*}*/
-
-    /*#categories #categories_search label {*/
-      /*font-size: 11px;*/
-      /*margin-right: 5px;*/
-    /*}*/
-
-    /*#categories #categories_search input {*/
-      /*font-size: 11px;*/
-      /*margin: 0;*/
-      /*padding: 0;*/
-    /*}*/
-
-/*#category_items {*/
-  /*height: 315px;*/
-  /*overflow: auto;*/
-  /*overflow-x: hidden;*/
-  /*clear: both;*/
-/*}*/
-
-  /*#categories span.keywords {*/
-    /*display: none;*/
-  /*}*/
-
-  /*#categories a {*/
-    /*color: inherit;*/
-    /*text-decoration: none;*/
-  /*}*/
-
-    /*#categories a:hover {*/
-      /*background-color: #ddd;*/
-    /*}*/
-
-    /*#categories a#back {*/
-      /*display: block;*/
-      /*float: left;*/
-      /*margin-left: 5px;*/
-      /*padding: 0 5px 0 13px;*/
-      /*background: url(images/arrows/left.png) no-repeat 0 center;*/
-    /*}*/
-
-  /*#categories ol {*/
-    /*list-style: none;*/
-  /*}*/
-
-    /*#categories #category_search_results {*/
-      /*background-color: #eee;*/
-      /*border: 3px solid #666;*/
-      /*position: absolute;*/
-      /*top: 20px;*/
-      /*right: 18px;*/
-    /*}*/
-
-    /*#categories #category_search_results li {*/
-      /*margin: 0;*/
-    /*}*/
-
-    /*#categories #category_search_results a {*/
-      /*padding: 3px 3px 3px 5px;*/
-      /*line-height: 1.5em;*/
-      /*background: none;*/
-      /*font-size: 11px;*/
-      /*width: 200px;*/
-    /*}*/
-
-      /*#categories #category_search_results a:hover {*/
-        /*background: #8AB0CF;*/
-        /*color: #fff;*/
-        /*font-size: 11px;*/
-        /*width: 200px;*/
-      /*}*/
-
-    /*#categories ol.root {*/
-      /*clear: left;*/
-      /*position: relative;*/
-    /*}*/
-
-      /*#categories ol ol {*/
-        /*display: none;*/
-        /*position: absolute;*/
-        /*margin-left: 305px;*/
-        /*top: 0;*/
-      /*}*/
-
-        /*#categories ol li.highlighted > ol {*/
-          /*display: block;*/
-        /*}*/
-
-    /*#categories ol li {*/
-      /*margin: 5px;*/
-    /*}*/
-
-      /*#categories ol li input {*/
-        /*display: block;*/
-        /*float: left;*/
-        /*margin: 7px 5px 5px;*/
-      /*}*/
-
-      /*#categories ol li a {*/
-        /*display: block;*/
-        /*width: 285px;*/
-        /*padding: 5px 15px 5px 5px;*/
-        /*background: url(images/arrows/right.png) #eee no-repeat 292px center;*/
-      /*}*/
-
-        /*#categories ol li.highlighted > a {*/
-          /*background-image: url(images/arrows/right-selected.png);*/
-        /*}*/
-
-      /*#categories ol li.last a {*/
-        /*background-image: none;*/
-      /*}*/
-
-      /*#categories ol li.descendant_selected > a {*/
-        /*background-color: #8ab0cf;*/
-      /*}*/
-
-      /*#categories ol li.selected > a {*/
-        /*background-color: #607B90;*/
-      /*}*/
-
-        /*#categories ol li.selected > a,*/
-        /*#categories ol li.descendant_selected > a {*/
-          /*color: #fff;*/
-        /*}*/

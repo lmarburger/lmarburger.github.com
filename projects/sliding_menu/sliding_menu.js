@@ -106,13 +106,13 @@
 
     // Highlight a category to show its children.
     function highlightCategory(category) {
-      var parent = category.parent()
+      var parent = category.closest("li")
         .trigger("highlight")
         .trigger("reposition");
 
       // Select and deselect leaves.
       if (parent.is(".last")) {
-        var selected = parent.children("input").is(":checked");
+        var selected = parent.find("> .category_item input").is(":checked");
         parent.trigger(selected ? "deselect" : "select");
       }
     }
@@ -126,7 +126,7 @@
       // programatically. Pushing the handler execution to the bottom of
       // the stack should make both methods consistent.
       setTimeout(function() {
-        checkbox.parent().trigger(checkbox.is(":checked") ? "select" : "deselect");
+        checkbox.closest("li").trigger(checkbox.is(":checked") ? "select" : "deselect");
       }, 10);
     }
 
@@ -173,7 +173,7 @@
       item.parents("ol.root li").addClass("descendant_selected");
 
       // Make sure this category is checked.
-      item.children("input")[0].checked = true;
+      item.find("> .category_item input")[0].checked = true;
       item.addClass("selected");
 
       // Add this category to the list of selected categories.
@@ -192,7 +192,7 @@
         )
 
         .append(
-          item.children("a").clone()
+          item.find("> .category_item a").clone()
 
             // Show and scroll to this category.
             .click(function(e) {
@@ -240,7 +240,7 @@
       var item = $(e.target);
 
       // Make sure this category is unchecked.
-      item.children("input")[0].checked = false;
+      item.find("> .category_item input")[0].checked = false;
       item.removeClass("selected");
 
       // Propagate this event down the tree to deselect all of
@@ -301,7 +301,7 @@
 
     // Create a list item for the given search match.
     function searchMatchItem(match) {
-      var link = match.children("a").clone()
+      var link = match.find("> .category_item a").clone()
         .bind("click", { match: match }, selectSearchResult);
 
       return $("<li/>").append(link);
@@ -319,9 +319,12 @@
       searchResults.hide();
     }
 
+
     // Scriptaculous' highlight() method trips over the category's
     // highlight event. It's not used here anyway so I'm just removing it.
-    if (Element && Element.addMethods) {
+    // IE also chokes when simply testing for the existance of Element. Looking
+    // for window.Element fixes that.
+    if (window.Element && Element.addMeethods) {
       Element.addMethods({ highlight: function() {} });
     }
   });
@@ -355,7 +358,7 @@
       return this;
 
       function addSearchTerm(item) {
-        var category = item.children("a");
+        var category = item.find("> .category_item a");
         terms.push([
           category.text(),
           category.siblings(".keywords").text()

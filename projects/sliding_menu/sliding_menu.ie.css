@@ -1,0 +1,20 @@
+#category_items .category_item input {
+  margin-top: 5px;
+}
+
+  #category_items .category_item:hover {
+    background-color: #eee;
+  }
+
+    #category_items li.descendant_selected > .category_item {
+      background-color: #8ab0cf;
+    }
+
+    #category_items li.selected > .category_item {
+      background-color: #607B90;
+    }
+
+#category_items .category_item a {
+  width: 265px;
+  background-position: 272px center;
+}
