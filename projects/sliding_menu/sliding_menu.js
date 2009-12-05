@@ -324,7 +324,7 @@
     // highlight event. It's not used here anyway so I'm just removing it.
     // IE also chokes when simply testing for the existance of Element. Looking
     // for window.Element fixes that.
-    if (window.Element && Element.addMeethods) {
+    if (window.Element && Element.addMethods) {
       Element.addMethods({ highlight: function() {} });
     }
   });
@@ -395,7 +395,7 @@
           // Select the top 10 results
           scores = scores.sort(scoreSort).slice(0, 10);
 
-          results = scores.map(function(score) {
+          results = $.map(scores, function(score) {
             return score[1];
           });
 

@@ -45,11 +45,10 @@ body {
 
   #categories ol {
     list-style: none;
-    border: 1px solid #f0f;
   }
 
     #categories a {
-      color: inherit;
+      color: #444;
       text-decoration: none;
     }
 
@@ -112,12 +111,10 @@ body {
 
 
 #category_items {
-  height: 304px;
+  height: 300px;
   overflow: auto;
   overflow-x: hidden;
   clear: both;
-
-  /* IE */
   position: relative;
 }
 
@@ -135,16 +132,13 @@ body {
 
       #category_items ol ol {
         display: none;
-        visibility: hidden;
-        position: absolute;
-        margin-left: 315px;
-        top: 0;
       }
 
         #category_items ol li.highlighted > ol {
           display: block;
-          border: 1px solid #f0f;
-          visibility: visible;
+          position: absolute;
+          margin-left: 315px;
+          top: 0;
         }
 
       #category_items .category_item {
@@ -155,9 +149,7 @@ body {
       #category_items .category_item input {
         display: block;
         float: left;
-        margin-top: 7px;
-        margin-bottom: 7px;
-        /*margin: 7px 5px 0px;*/
+        margin: 7px 5px 0px;
       }
 
       #category_items .category_item a {
