@@ -20,6 +20,7 @@
       $("#back").click(moveBack);
 
       $("#categories_search input")
+        .watermark("Find a category...")
         .bind("search", showMatches)
         .focus(showSearchResults);
 
@@ -333,10 +334,11 @@
   // so check to see if _reverse() exists and use that instead.
   $.fn.reverse = (Array.prototype._reverse || Array.prototype.reverse);
 
-  // Watches the selected input for changes and searches through
-  // the given list for matched items. If any are found, the
-  // "search" event is triggered and matches are passed along.
   $.fn.extend({
+
+    // Watches the selected input for changes and searches through
+    // the given list for matched items. If any are found, the
+    // "search" event is triggered and matches are passed along.
     listSearch: function(list) {
       list = $(list);
       var input = this;
@@ -410,8 +412,35 @@
       function searchResults(searchField, results) {
         searchField.trigger("search", results);
       }
-    }
-  });
+    },
+
+    watermark: function(emptyText) {
+      this.filter("input[type=text]").each(function() {
+        var $this = $(this)
+          .focus(function() { removeWatermark($this); })
+          .blur(function() { addWatermark($this); });
+
+        // Remove the watermark before the form submits.
+        $this.closest("form").submit(function() { removeWatermark($this); });
+
+        addWatermark($this);
+      });
+
+      return this;
+
+      function addWatermark(input) {
+        if (input.val() == "") {
+          input.addClass("empty").val(emptyText);
+        }
+      }
+
+      function removeWatermark(input) {
+        if (input.val() == emptyText) {
+          input.removeClass("empty").val("");
+        }
+      }
+		}
+	});
 
 })(jQuery);
 

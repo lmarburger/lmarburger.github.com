@@ -55,9 +55,9 @@ body {
       #categories a#back {
         display: block;
         float: left;
-        margin-left: 5px;
-        padding: 0 5px 0 13px;
-        background: url(images/arrows/left.png) no-repeat 0 center;
+        margin: 2px 0 9px 5px;
+        padding: 3px 5px 3px 16px;
+        background: url(images/arrows/left.png) no-repeat 3px center;
       }
 
         #categories a#back:hover {
@@ -66,28 +66,37 @@ body {
 
   /* Search form */
   #categories_search {
-    float: right;
-    margin-right: 18px;
+    float: left;
+    margin-left: 39px;
   }
 
     #categories_search label {
-      font-size: 11px;
-      margin-right: 5px;
+      display:none;
+      font-size: 15px;
     }
 
     #categories_search input {
-      font-size: 11px;
-      margin: 0;
-      padding: 0;
+      font-size: 15px;
+      width: 205px;
+      margin: 0 5px 0 0;
+      padding: 2px 0;
     }
+
+      #categories_search input.empty {
+        color: #999;
+      }
 
   /* Search results */
   #category_search_results {
     background-color: #eee;
     border: 3px solid #666;
     position: absolute;
-    top: 20px;
-    right: 18px;
+    top: 27px;
+    left: 93px;
+
+    /* Custom */
+    top: 37px;
+    left: 104px;
   }
 
   #category_search_results li {
@@ -95,6 +104,7 @@ body {
   }
 
   #category_search_results a {
+    display: block;
     padding: 3px 3px 3px 5px;
     line-height: 1.5em;
     background: none;
