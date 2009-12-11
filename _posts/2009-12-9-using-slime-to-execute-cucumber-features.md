@@ -83,6 +83,11 @@ And an alias I threw into [`~/.bashrc`][bashrc]:
 I'll definitely be expanding these tools to better fit my workflow. If you have
 a clever addition or another approach to the problem, I'd love to see it.
 
+**Update:** I've been advised to clarify one point. slim.vim isn't technically
+slime; it's just a way to get some similar functionality in vim.  Thanks, David,
+for pointing that out before the angry tweets started streaming in from emacs
+users.
+
 
 [cposc]: http://www.cposc.org
 [djwhitt]: http://twitter.com/djwhitt
