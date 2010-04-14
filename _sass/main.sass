@@ -8,39 +8,39 @@
   // +showgrid
 
   // Pushing a few items outside the container.
-  :overflow visible
+  overflow: visible
 
   #main
     +column(7)
 
   #sidebar
     +column(3, true)
-    :padding-top 36px
-    :color #666
+    padding-top: 36px
+    color: #666
 
     h2
-      :color #666
-      :font-weight normal
-      :margin 0 0 0.25em
+      color: #666
+      font-weight: normal
+      margin: 0 0 0.25em
 
     #filter
       +flatten_list
-      :margin-top 3em
+      margin-top: 3em
 
       li
-        :float left
+        float: left
 
         a
-          :display block
-          :padding-left 36px
-          :font-size 1.5em
-          :background
-            :repeat no-repeat
-            :position 10px 50%
+          display: block
+          padding-left: 36px
+          font-size: 1.5em
+          background:
+            repeat: no-repeat
+            position: 10px 50%
 
           &.blog
-            :background-image= image_url("note.png")
-            :margin-right 10px
+            background-image= image_url("note.png")
+            margin-right: 10px
 
           &.tweet
-            :background-image= image_url("tweet.png")
+            background-image= image_url("tweet.png")

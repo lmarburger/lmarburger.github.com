@@ -9,44 +9,55 @@
 
 
 body
-  :color #000
+  color: #000
 
 a
   +border_radius(6px)
-  :color = !my_dark_blue
-  :background-color #f0f0f0
-  :padding 0.25em 0.5em
-  :text-decoration none
+  color= !my_dark_blue
+  background-color: #f0f0f0
+  padding: 0.25em 0.5em
+  text-decoration: none
 
   &:visited
-    :color = !my_dark_blue
+    color= !my_dark_blue
 
   &:active, &:hover
-    :background-color = !my_light_blue
-    :color white
+    background-color= !my_light_blue
+    color: white
 
   h1 &
-    :color #{ !my_green } !important
+    color: #{ !my_green } !important
 
     &:hover
-      :background-color = !my_green
-      :color #FFFFFF !important
+      background-color= !my_green
+      color: #FFFFFF !important
 
   h1 &, h2 &
-    :background-color inherit
+    background-color: inherit
 
-h1, h2
-  :font-weight bold
-  :margin 1em 0 0.5em 0
+h1, h2, h3, h4
+  font-weight: bold
+  margin: 1em 0 0.5em 0
 
   a
-    :padding 5px
-    :margin -5px
+    padding: 5px
+    margin: -5px
+
+  small
+    font-size: 0.8em
+
+h2 small
+  font-size: 0.6em
+  text-transform: lowercase
+  display: block
+
+h3, h4
+  margin-top: 1.5em
 
 // Code blocks
 pre
-  :background-color #f8f8ff
-  :border 1px solid #dedede
-  :padding 0.5em
-  :margin 1.5em
-  :overflow auto
+  background-color: #f8f8ff
+  border: 1px solid #dedede
+  padding: 0.5em
+  margin: 1.5em
+  overflow: auto
