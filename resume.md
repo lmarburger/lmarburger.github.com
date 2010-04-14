@@ -34,9 +34,9 @@ after I failed to make a single sale. After about two years helping customers
 use one of the worst products on the market, I slowly made the transition to
 full time developer after I mastered Regular Expressions and built a wildly
 successful web crawler to pluck email addresses from church directories. I
-helped build a less awful version of their CMS using C# and ASP.NET 1.1 and did
-a lot of JavaScript work trying to build a cross-browser WYSIWYG content editor
-that I was never able to complete.
+helped build a less awful version of their CMS using C# and ASP.NET 1.1 and
+wrote many lines of JavaScript in an attempt to construct a cross-browser
+WYSIWYG content editor that I was never able to complete.
 
 
 ### Education
@@ -50,16 +50,16 @@ completed before dropping out to accept the
 ### Referrals
 
 #### [Joshua Miller][josh]
-After meeting at [a Ruby meetup][ruby_group], we've worked a lot together since
-I started my freelance career.
+After meeting at [a Ruby meetup][ruby_group], we've worked together on many
+projects together since starting my freelance career.
 
 #### [Francis Lukesh][fran]
 My direct supervisor at andCulture for about half the time I was employed and a
 terrific friend.
 
 #### [Rogie King][rogie]
-We haven't had the pleasure to work together on a project, but I mock his
-designs and he tells me I can't code my way out of a paper bag.
+We haven't had the opportunity to work together yet, but I mock his designs and
+he tells me I can't code my way out of a paper bag.
 
 #### Annette Light
 My mother. Who would know my faults better than the person responsible for me
