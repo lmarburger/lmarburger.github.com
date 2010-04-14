@@ -47,7 +47,7 @@ completed before dropping out to accept the
 [aforementioned sales position][elexio] in 2002.
 
 
-### Referrals
+### References
 
 #### [Joshua Miller][josh]
 After meeting at [a Ruby meetup][ruby_group], we've worked together on many
