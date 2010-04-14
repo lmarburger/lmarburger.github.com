@@ -28,15 +28,17 @@ future projects and I wasn't self-loathing enough to go back after drinking of
 the sweet nectar that is Ruby.
 
 #### Web Developer, Elexio <small>Elizabethtown, PA 2002-2007</small>  {: #elexio }
-Hired as a salesman for an in-house developed CMS written in ASP, I fell into
-the role of the sole customer support representative in lieu of being fired
-after I failed to make a single sale. After about two years helping customers
-use one of the worst products on the market, I slowly made the transition to
-full time developer after I mastered Regular Expressions and built a wildly
-successful web crawler to pluck email addresses from church directories. I
-helped build a less awful version of their CMS using C# and ASP.NET 1.1 and
-wrote many lines of JavaScript in an attempt to construct a cross-browser
-WYSIWYG content editor that I was never able to complete.
+Hired as a salesman for an in-house developed CMS written in ASP 3.0, I fell
+into the role of the sole customer support representative in lieu of being fired
+after my paperweight and I tied in number of sales. I single-handedly helped
+people use one of the worst products on the market both directly and by writing
+a vast library of knowledge base articles. I slowly made the transition to full
+time developer after mastering Regular Expressions to build a wildly successful
+web crawler to pluck email addresses from church directories. I helped build a
+less awful version of their CMS using C# and ASP.NET 1.1 and discovered my true
+love of coding by writing JavaScript to construct a cross-browser WYSIWYG
+content editor. Thankfully Firefox and Safari added support for
+[contentEditable] and obviated the need.
 
 
 ### Education
@@ -62,12 +64,13 @@ We haven't had the opportunity to work together yet, but I mock his designs and
 he tells me I can't code my way out of a paper bag.
 
 #### Annette Light
-My mother. Who would know my faults better than the person responsible for me
-and who I drove insane while navigating my awkward teenage years?
+My mother. Who would know my foibles better than the person whom I drove insane
+while navigating my awkward teenage years?
 
 
 
 [ruby_group]: http://ruby.meetup.com/102
+[contentEditable]: http://developer.mozilla.org/en/DOM/element.contentEditable
 [elexio]: #elexio
 [josh]: http://joshinharrisburg.com/
 [fran]: http://lukesh.com
