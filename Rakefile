@@ -40,7 +40,7 @@ class TweetsToJekyll
     def tweet_ids
       tweets.map do |path|
         match = path.match %r{/\d{4}-\d{1,2}-\d{1,2}-(\d+)\.md}
-        match[1] if match
+        match[1].to_i if match
       end.compact.sort
     end
 
