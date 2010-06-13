@@ -14,27 +14,24 @@
         .bind("highlight", categoryHighlighted)
         .bind("unhighlight", categoryUnhighlighted)
         .bind("select", categorySelected)
-        .bind("deselect", categoryDeselected);
+        .bind("deselect", categoryDeselected),
+
+      searchField = $("#categories_search input")
+        .watermark("Find a category...")
+        .bind("search", categorySearch)
+        .bind("showResults", showSearchResults)
+        .bind("hideResults", hideSearchResults)
+        .focus(showSearchResults)
+
+        // Setup search when the search box is first focused.
+        .focus(function() {
+          $(this)
+            .unbind("focus", arguments.callee)
+            .listSearch(categories);
+        });
 
       // Move back through the category hierarchy.
       $("#back").click(moveBack);
-
-      $("#categories_search input")
-        .watermark("Find a category...")
-        .bind("search", showMatches)
-        .focus(showSearchResults);
-
-        // I'd like to hide the search results on blur, but
-        // blur is also triggered on mousedown when clicking
-        // on a result. That means the results are hidden before
-        // click can fire. That doens't work so well.
-        //.blur(function() {
-          //window.setTimeout(function() {
-            //if (searchResults.is(":visible")) {
-              //searchResults.hide();
-            //}
-          //}, 10);
-        //});
 
 
     /******************
@@ -46,9 +43,8 @@
       var
         highlightedLevels = categories.find(".highlighted"),
         leftmostLevel = highlightedLevels.length - 1,
-        deepestHighlighted = highlightedLevels.eq(leftmostLevel);
+        deepestHighlighted = highlightedLevels.eq(leftmostLevel),
 
-      var
         left = Math.min(leftmostLevel * -315, 0),
         top = categoryTopPosition(deepestHighlighted);
 
@@ -126,9 +122,9 @@
       // of the checkbox between clicking it direclty and calling click()
       // programatically. Pushing the handler execution to the bottom of
       // the stack should make both methods consistent.
-      setTimeout(function() {
+      _.defer(function() {
         checkbox.closest("li").trigger(checkbox.is(":checked") ? "select" : "deselect");
-      }, 10);
+      });
     }
 
     function categoryHighlighted(e) {
@@ -184,11 +180,11 @@
 
             // Deselect this category when the checkbox is unchecked.
             .click(function() {
-              setTimeout(function() {
+              _.defer(function() {
                 if (!$(e.target).is(":checked")) {
                   item.trigger("deselect");
                 }
-              }, 0);
+              });
             })
         )
 
@@ -266,38 +262,44 @@
      * Search
      ******************/
 
-    var searchResults;
-    function prepareSearch(input) {
-      searchResults = $('<ol id="category_search_results" />')
+    var searchResultsList;
+    function createSearchResults() {
+      searchResultsList = $('<ol id="category_search_results" />')
         .hide()
         .appendTo($("#categories"));
-
-      input.listSearch($("ol.root"));
     }
 
-    function showSearchResults(e) {
-      if (!searchResults) {
-        prepareSearch($(this));
-      } else if (searchResults.children("li").length) {
-        searchResults.show();
+    function categorySearch(e, matches) {
+      if (!searchResultsList) {
+        createSearchResults();
       }
-    }
 
-    function showMatches(e, matches) {
-      searchResults.empty();
+      searchResultsList.empty();
 
       if (!matches || !matches.length) {
-        searchResults.hide();
+        $(this).trigger("hideResults");
         return;
       }
 
-      $.each(matches, function() {
+      $(matches).each(function() {
         var
           li = $(this),
           item = searchMatchItem(li);
 
-        searchResults.append(item).show();
+        searchResultsList.append(item);
       });
+
+      $(this).trigger("showResults");
+    }
+
+    function showSearchResults() {
+      if (searchResultsList && searchResultsList.children("li").length) {
+        searchResultsList.show();
+      }
+    }
+
+    function hideSearchResults() {
+      searchResultsList.hide();
     }
 
     // Create a list item for the given search match.
@@ -317,100 +319,120 @@
         .trigger("select")
         .trigger("reposition");
 
-      searchResults.hide();
-    }
-
-
-    // Scriptaculous' highlight() method trips over the category's
-    // highlight event. It's not used here anyway so I'm just removing it.
-    // IE also chokes when simply testing for the existance of Element. Looking
-    // for window.Element fixes that.
-    if (window.Element && Element.addMethods) {
-      Element.addMethods({ highlight: function() {} });
+      searchField.trigger("hideResults");
     }
   });
 
-  // Let's add reverse(). Prototype hijacks the real reverse mehtod,
-  // so check to see if _reverse() exists and use that instead.
-  $.fn.reverse = (Array.prototype._reverse || Array.prototype.reverse);
-
   $.fn.extend({
+
+    // Let's add reverse().
+    reverse: Array.prototype.reverse,
 
     // Watches the selected input for changes and searches through
     // the given list for matched items. If any are found, the
     // "search" event is triggered and matches are passed along.
     listSearch: function(list) {
       list = $(list);
-      var input = this;
+
+      var searchField = this
+        .focus(search)
+        .keypress(function(e) {
+          if (e.keyCode == 13) {
+            e.preventDefault();
+          }
+        //})
+        //.blur(function() {
+          //_.defer(function() {
+          //});
+        });
 
       if (list.length) {
         var
           items = list.find("li"),
-          terms = [],
+          keywords = [],
           count = 0,
           total = items.length,
           previousSearch;
 
-        items.map(function() {
-          var item = $(this);
-          setTimeout(function() { addSearchTerm(item); }, 0);
+        items.each(function(i, item) {
+
+          // Queue adding items to the searched array. If there are a lot of
+          // items, this could lock the UI while it's buiding the array.
+          _.defer(function() { addKeyword(item); });
         });
       }
 
       return this;
 
-      function addSearchTerm(item) {
-        var category = item.find("> .category_item a");
-        terms.push([
+      function addKeyword(item) {
+        var category = $(item).find("> .category_item a");
+        keywords.push([
           category.text(),
           category.siblings(".keywords").text()
         ].join(" ").toLowerCase());
 
         if (++count == total) {
-          terms = $(terms);
-          input.keyup(search);
-          search();
+          keywords = _(keywords);
+
+          var searchTimeout;
+          searchField
+            .keyup(function(e) {
+              if (searchTimeout) {
+                clearTimeout(searchTimeout);
+              }
+
+              searchTimeout = _.delay(function() {
+                searchTimeout = null;
+                search();
+              }, 250);
+            })
+            .keyup();
         }
       }
 
       function search() {
-        var
-          searchField = $(this),
-          term = $.trim(searchField.val().toLowerCase()),
-          scores = [];
+        var searchTerm = $.trim(searchField.val().toLowerCase());
 
         // Exit quickly if the search term hasn't changed.
-        if (previousSearch == term) { return; }
-        previousSearch = term;
+        if (previousSearch == searchTerm) { return; }
+        previousSearch = searchTerm;
 
-        // Return null if there is no term.
-        if (!term) { searchResults(searchField, null); }
+        // Return null if there is no search term.
+        if (!searchTerm) { searchResults(searchField, null); }
 
-        if (term) {
-          terms.each(function(i) {
-            var score = this.score(term);
-            if (score > 0) {
-              scores.push([ score, items[i] ]);
-            }
-          });
-
-          // Select the top 10 results
-          scores = scores.sort(scoreSort).slice(0, 10);
-
-          results = $.map(scores, function(score) {
-            return score[1];
-          });
-
-          searchResults(searchField, [ results ]);
+        if (searchTerm) {
+          searchResults(searchField,
+            keywords.chain()
+              .map(function(keyword, i) {
+                var score = keywordSearch(keyword, searchTerm);
+                if (score > 0) {
+                  return { score: score, item: items[i] };
+                }
+              })
+              .compact()
+              .sortBy(function(score) {
+                return score.score * -1;
+              })
+              .slice(0, 10)
+              .pluck("item")
+              .value()
+          );
         }
       }
 
-      function scoreSort(a, b) {
-        return b[0] - a[0];
+      function keywordSearch(keyword, searchTerm) {
+        return _(searchTerm.split(/\s+/)).chain()
+          .map(function(word) {
+            return keyword.score(word);
+          })
+          .reduce(0, function(sum, score) {
+            return sum + score;
+          })
+          .value();
       }
 
       function searchResults(searchField, results) {
-        searchField.trigger("search", results);
+        searchField.trigger("search", (results ? [ results ] : results));
       }
     },
 
@@ -439,103 +461,49 @@
           input.removeClass("empty").val("");
         }
       }
-		}
-	});
+    }
+  });
 
 })(jQuery);
 
-// qs_score - Quicksilver Score
-// 
-// A port of the Quicksilver string ranking algorithm
-// 
-// "hello world".score("axl") //=> 0.0
-// "hello world".score("ow") //=> 0.6
-// "hello world".score("hello world") //=> 1.0
-//
-// Tested in Firefox 2 and Safari 3
-//
-// The Quicksilver code is available here
-// http://code.google.com/p/blacktree-alchemy/
-// http://blacktree-alchemy.googlecode.com/svn/trunk/Crucible/Code/NSString+BLTRRanking.m
-//
-// The MIT License
-// 
-// Copyright (c) 2008 Lachie Cox
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy
-// of this software and associated documentation files (the "Software"), to deal
-// in the Software without restriction, including without limitation the rights
-// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-// copies of the Software, and to permit persons to whom the Software is
-// furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in
-// all copies or substantial portions of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-// THE SOFTWARE.
 
+String.prototype.score = function(search) {
+  if (search.length == 0 || this.length == 0) { return 0.0; }
 
-String.prototype.score = function(abbreviation,offset) {
-  offset = offset || 0 // TODO: I think this is unused... remove
- 
-  if(abbreviation.length == 0) return 0.9
-  if(abbreviation.length > this.length) return 0.0
+  for (var i = search.length; i > 0; i--) {
+    var
+      subSearch = search.substring(0, i),
+      index = this.search(new RegExp("\\b" + subSearch)),
+      score = subSearch.length;
 
-  for (var i = abbreviation.length; i > 0; i--) {
-    var sub_abbreviation = abbreviation.substring(0,i)
-    var index = this.indexOf(sub_abbreviation)
-
-
-    if(index < 0) continue;
-    if(index + abbreviation.length > this.length + offset) continue;
-
-    var next_string       = this.substring(index+sub_abbreviation.length)
-    var next_abbreviation = null
-
-    if(i >= abbreviation.length)
-      next_abbreviation = ''
-    else
-      next_abbreviation = abbreviation.substring(i)
- 
-    var remaining_score   = next_string.score(next_abbreviation,offset+index)
- 
-    if (remaining_score > 0) {
-      var score = this.length-next_string.length;
-
-      if(index != 0) {
-        var j = 0;
-
-        var c = this.charCodeAt(index-1)
-        if(c==32 || c == 9) {
-          for(var j=(index-2); j >= 0; j--) {
-            c = this.charCodeAt(j)
-            score -= ((c == 32 || c == 9) ? 1 : 0.15)
-          }
-
-          // XXX maybe not port this heuristic
-          // 
-          //          } else if ([[NSCharacterSet uppercaseLetterCharacterSet] characterIsMember:[self characterAtIndex:matchedRange.location]]) {
-          //            for (j = matchedRange.location-1; j >= (int) searchRange.location; j--) {
-          //              if ([[NSCharacterSet uppercaseLetterCharacterSet] characterIsMember:[self characterAtIndex:j]])
-          //                score--;
-          //              else
-          //                score -= 0.15;
-          //            }
-        } else {
-          score -= index
-        }
-      }
-   
-      score += remaining_score * next_string.length
-      score /= this.length;
-      return score
+    // Boost the score if it matches at the beginning of a word.
+    if (index >= 0) {
+      score += 1;
+    } else {
+      index = this.indexOf(subSearch);
     }
+
+    // No match.
+    if (index < 0) { continue; }
+
+    // Remove the matched characters and try to match the unmatched search.
+    var
+      nextSearch = search.substring(i),
+      nextString = this.substring(0, index) +
+        this.substring(index + subSearch.length),
+
+      remainingScore = nextString.score(nextSearch);
+
+    // Subtract the score of a non-match.
+    if (remainingScore <= 0 && nextSearch.length) {
+      remainingScore = Math.pow(2, nextSearch.length) * -1;
+    }
+
+    // Reduce the value of non-consecutive multiple matches.
+    remainingScore *= 0.9;
+
+    return Math.pow(2, score) + remainingScore;
   }
-  return 0.0
-}
+
+  return 0.0;
+};
