@@ -2,20 +2,13 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <title>
-      {% if page.category == "tweet" %}
-        Tweet
-      {% else %}
-        {{ page.title }}
-      {% endif %}
-    </title>
+    <title>{{ page.title }}</title>
     <meta name="author" content="Larry Marburger" />
 
     <link rel="stylesheet" href="/stylesheets/main.css" type="text/css" media="screen, projection" />
     <link rel="stylesheet" href="/stylesheets/syntax.css" type="text/css" media="screen, projection" />
 
     <link rel="alternate" type="application/atom+xml" title="Posts" href="/posts_feed.xml" />
-    <link rel="alternate" type="application/rss+xml" title="Tweets" href="http://twitter.com/statuses/user_timeline/2355631.rss" />
   </head>
   <body>
     <div id="content">
@@ -34,17 +27,13 @@
         <h2>Who is this guy?</h2>
         <p id="about">
           I'm just some guy on the internet who likes technology—Ruby, Rails, and
-          JavaScript to name a few. With them, I build kickass web thingamajigs.
+          JavaScript to name a few. With them, I build kickass web thingamajigs
+          like <a href="http://getcloudapp.com" title="CloudApp">CloudApp</a>.
         </p>
         <p>
           Find me on <a href="http://github.com/lmarburger" title="GitHub">GitHub</a>
           and <a href="http://twitter.com/lmarburger" title="Twitter">Twitter</a>.
         </p>
-
-        <ol id="filter">
-          <li><a class="blog" href="/posts.html">Posts</a></li>
-          <li><a class="tweet" href="/tweets.html">Tweets</a></li>
-        </ol>
       </div>
     </div>
 

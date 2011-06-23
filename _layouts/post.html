@@ -3,12 +3,8 @@ layout: default
 ---
 <ol id="entries">
   <li class="{{ page.category }}">
-    {% if page.category == 'tweet' %}
-      <a class="permalink" href="http://twitter.com/lmarburger/status/{{ page.title }}" title="View tweet">View tweet</a>
-    {% else %}
-      <a class="permalink" href="{{ page.url }}" title="{{ page.title | xml_escape }}">Permalink</a>
-      <h2><a href="{{ page.url }}" title="{{ page.title | xml_escape }}">{{ page.title | xml_escape }}</a></h2>
-    {% endif %}
+    <a class="permalink" href="{{ page.url }}" title="{{ page.title | xml_escape }}">Permalink</a>
+    <h2><a href="{{ page.url }}" title="{{ page.title | xml_escape }}">{{ page.title | xml_escape }}</a></h2>
 
     {{ content }}
   </li>
