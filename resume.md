@@ -4,21 +4,32 @@ title: Developmentastic
 ---
 ## <small>From the desk of</small> [Larry Marburger](mailto:larry@marburger.cc) {: #resume }
 
-I build websites and I'm passionate about my craft. I care about building sites
-focused around people and how they will interact with them. I'm a firm believer
-in using test-driven and iterative development practices. I take strides every
-day to improve myself and skills by being active in
-[my local Ruby users' group][ruby_group] and exploring new technologies.
+I built [CloudApp](http://getcloudapp.com) and I'm passionate about my craft. I
+care about building products focused around people and how they interact with
+them. Test-driven design and iterative development are fantastic tools that have
+changed the way I approach problems. I take strides every day to improve myself
+and skills by being active in [my local Ruby users' group][ruby_group],
+attending mind expanding events like [Ruby DCamp][ruby_dcamp] and exploring new
+technologies.
 
 
 ### Experience
 
-#### Homeopathic Code Remedyologist <small>Middletown, PA 2009-Present</small>
+#### Homeopathic Code Remedyologist, CloudApp <small>2010-Present</small>  {: #cloudapp }
+
+I found Max and Nick early in 2010 and immediately fell in love with CloudApp.
+With TDD and a vast array of open source at my disposal, namely Ruby and Rails,
+I joined the team and turned their proof of concept into a solid product. When
+it grew into a monolith, I refactored it into several smaller, agile
+applications each with clear concerns.
+
+
+#### Freelance Web Developer <small>2009-2010</small>
 I craved working _with_ clients to build something awesome instead of being
 handed a signed legal document stating the exact features that must be present
 in a project. In order to realize this dream, I knew I needed to find my own
 clients and cultivate that relationship instead of relying on my employer to do
-it for me. I've been coding Rails freelance ever since and loving it.
+it for me. This is what led me to Max, Nick, and [CloudApp][cloudapp].
 
 #### Web Developer, andCulture <small>Harrisburg, PA 2007-2009</small>
 I came on board because of my skills with JavaScript and experience with C# and
@@ -69,9 +80,11 @@ while navigating my awkward teenage years?
 
 
 
-[ruby_group]: http://ruby.meetup.com/102
+[ruby_group]:      http://ruby.meetup.com/102
+[ruby_dcamp]:      http://rubydcamp.org
 [contentEditable]: http://developer.mozilla.org/en/DOM/element.contentEditable
-[elexio]: #elexio
-[josh]: http://joshinharrisburg.com/
-[fran]: http://lukesh.com
-[rogie]: http://www.komodomedia.com/
+[cloudapp]:        #cloudapp
+[elexio]:          #elexio
+[josh]:            http://joshinharrisburg.com/
+[fran]:            http://lukesh.com
+[rogie]:           http://www.komodomedia.com/
