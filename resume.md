@@ -4,16 +4,44 @@ title: Developmentastic
 ---
 ## <small>From the desk of</small> [Larry Marburger](mailto:larry@marburger.cc) {: #resume }
 
-I built [CloudApp](http://getcloudapp.com) and I'm passionate about my craft. I
-care about building products focused around people and how they interact with
-them. Test-driven design and iterative development are fantastic tools that have
-changed the way I approach problems. I take strides every day to improve myself
-and skills by being active in [my local Ruby users' group][ruby_group],
-attending mind expanding events like [Ruby DCamp][ruby_dcamp] and exploring new
-technologies.
+I built [CloudApp](http://getcloudapp.com) and I'm passionate about my craft.
+I care about building products focused around people and how they interact
+with them. Test-driven design and iterative development have changed the way I
+approach problems. I take strides every day to improve myself and skills by
+being active in [my local Ruby users' group][ruby_group], attending mind
+expanding events like [Ruby DCamp][ruby_dcamp] and exploring new technologies.
 
 
 ### Experience
+
+#### Open Source {: #oss }
+
+I use and contribute to Open Source Software.
+
+ - Much of the [code we write at CloudApp][cloudapp-oss] is open source
+   including [the app that serves all cl.ly links][viso] and a
+   [CLI and API wrapper for Ruby][cloudapp.rb].
+ - [bundler-api][]: I help the Bundler team by volunteering to keep the API up
+   and running as well as adding metrics instrumentation to monitor
+   performance in production. As a service to the community,
+   [the dashboard][dashboard] is publicly accessible.
+ - [metriks-middleware][]: A rack middleware to collect simple metrics.
+ - [p2met][]: [Eric Lindvall][eric] and I collaborated on a project to get
+   logged metrics data from [Papertrail][] into
+   [Librato Metrics][librato-metrics].
+ - [pilfer][]: Line profiling for your production applications.
+
+[cloudapp-oss]: https://github.com/cloudapp
+[viso]: https://github.com/cloudapp/viso
+[cloudapp.rb]: https://github.com/cloudapp/cloudapp.rb
+[bundler-api]: https://github.com/rubygems/bundler-api
+[dashboard]: https://metrics.librato.com/share/dashboards/k4b5bhm8
+[metriks-middleware]: https://github.com/lmarburger/metriks-middleware
+[p2met]: https://github.com/eric/p2met
+[eric]: https://github.com/eric
+[papertrail]: https://papertrailapp.com
+[librato-metrics]: https://metrics.librato.com
+[pilfer]: https://github.com/eric/pilfer/tree/refactoring
 
 #### Homeopathic Code Remedyologist, CloudApp <small>2010-Present</small>  {: #cloudapp }
 
